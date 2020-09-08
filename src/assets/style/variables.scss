@@ -1,0 +1,399 @@
+// theme color
+$theme: (
+  'blue': #004cff,
+  'indigo': #4e00ca,
+  'purple': #8600fb,
+  'pink': #d4146e,
+  'red': #c82334,
+  'orange': #f16407,
+  'yellow': #ffb300,
+  'green': #008040,
+  'teal': #20c997,
+  'cyan': #2a7ab0,
+  'dark': #121b25,
+);
+
+$color: rgb(207, 204, 201);
+$high-light: rgb(167, 168, 189);
+
+// theme
+$theme-blue: map-get($theme, 'blue') !default;
+$theme-indigo: map-get($theme, 'indigo') !default;
+$theme-purple: map-get($theme, 'purple') !default;
+$theme-pink: map-get($theme, 'pink') !default;
+$theme-red: map-get($theme, 'red') !default;
+$theme-orange: map-get($theme, 'orange') !default;
+$theme-yellow: map-get($theme, 'yellow') !default;
+$theme-green: map-get($theme, 'green') !default;
+$theme-teal: map-get($theme, 'teal') !default;
+$theme-cyan: map-get($theme, 'cyan') !default;
+
+$theme-blue-100: lighten($theme-blue, 40%) !default;
+$theme-blue-200: lighten($theme-blue, 30%) !default;
+$theme-blue-300: lighten($theme-blue, 20%) !default;
+$theme-blue-400: lighten($theme-blue, 10%) !default;
+$theme-blue-500: darken($theme-blue, 10%) !default;
+$theme-blue-600: darken($theme-blue, 20%) !default;
+$theme-blue-700: darken($theme-blue, 30%) !default;
+$theme-blue-800: darken($theme-blue, 40%) !default;
+
+$theme-indigo-100: lighten($theme-indigo, 40%) !default;
+$theme-indigo-200: lighten($theme-indigo, 30%) !default;
+$theme-indigo-300: lighten($theme-indigo, 20%) !default;
+$theme-indigo-400: lighten($theme-indigo, 10%) !default;
+$theme-indigo-500: darken($theme-indigo, 10%) !default;
+$theme-indigo-600: darken($theme-indigo, 20%) !default;
+$theme-indigo-700: darken($theme-indigo, 30%) !default;
+$theme-indigo-800: darken($theme-indigo, 40%) !default;
+
+$theme-purple-100: lighten($theme-purple, 40%) !default;
+$theme-purple-200: lighten($theme-purple, 30%) !default;
+$theme-purple-300: lighten($theme-purple, 20%) !default;
+$theme-purple-400: lighten($theme-purple, 10%) !default;
+$theme-purple-500: darken($theme-purple, 10%) !default;
+$theme-purple-600: darken($theme-purple, 20%) !default;
+$theme-purple-700: darken($theme-purple, 30%) !default;
+$theme-purple-800: darken($theme-purple, 40%) !default;
+
+$theme-pink-100: lighten($theme-pink, 40%) !default;
+$theme-pink-200: lighten($theme-pink, 30%) !default;
+$theme-pink-300: lighten($theme-pink, 20%) !default;
+$theme-pink-400: lighten($theme-pink, 10%) !default;
+$theme-pink-500: darken($theme-pink, 10%) !default;
+$theme-pink-600: darken($theme-pink, 20%) !default;
+$theme-pink-700: darken($theme-pink, 30%) !default;
+$theme-pink-800: darken($theme-pink, 40%) !default;
+
+$theme-red-100: lighten($theme-red, 40%) !default;
+$theme-red-200: lighten($theme-red, 30%) !default;
+$theme-red-300: lighten($theme-red, 20%) !default;
+$theme-red-400: lighten($theme-red, 10%) !default;
+$theme-red-500: darken($theme-red, 10%) !default;
+$theme-red-600: darken($theme-red, 20%) !default;
+$theme-red-700: darken($theme-red, 30%) !default;
+$theme-red-800: darken($theme-red, 40%) !default;
+
+$theme-orange-100: lighten($theme-orange, 40%) !default;
+$theme-orange-200: lighten($theme-orange, 30%) !default;
+$theme-orange-300: lighten($theme-orange, 20%) !default;
+$theme-orange-400: lighten($theme-orange, 10%) !default;
+$theme-orange-500: darken($theme-orange, 10%) !default;
+$theme-orange-600: darken($theme-orange, 20%) !default;
+$theme-orange-700: darken($theme-orange, 30%) !default;
+$theme-orange-800: darken($theme-orange, 40%) !default;
+
+$theme-yellow-100: lighten($theme-yellow, 40%) !default;
+$theme-yellow-200: lighten($theme-yellow, 30%) !default;
+$theme-yellow-300: lighten($theme-yellow, 20%) !default;
+$theme-yellow-400: lighten($theme-yellow, 10%) !default;
+$theme-yellow-500: darken($theme-yellow, 10%) !default;
+$theme-yellow-600: darken($theme-yellow, 20%) !default;
+$theme-yellow-700: darken($theme-yellow, 30%) !default;
+$theme-yellow-800: darken($theme-yellow, 40%) !default;
+
+$theme-green-100: lighten($theme-green, 40%) !default;
+$theme-green-200: lighten($theme-green, 30%) !default;
+$theme-green-300: lighten($theme-green, 20%) !default;
+$theme-green-400: lighten($theme-green, 10%) !default;
+$theme-green-500: darken($theme-green, 10%) !default;
+$theme-green-600: darken($theme-green, 20%) !default;
+$theme-green-700: darken($theme-green, 30%) !default;
+$theme-green-800: darken($theme-green, 40%) !default;
+
+$theme-teal-100: lighten($theme-teal, 40%) !default;
+$theme-teal-200: lighten($theme-teal, 30%) !default;
+$theme-teal-300: lighten($theme-teal, 20%) !default;
+$theme-teal-400: lighten($theme-teal, 10%) !default;
+$theme-teal-500: darken($theme-teal, 10%) !default;
+$theme-teal-600: darken($theme-teal, 20%) !default;
+$theme-teal-700: darken($theme-teal, 30%) !default;
+$theme-teal-800: darken($theme-teal, 40%) !default;
+
+$theme-cyan-100: lighten($theme-cyan, 40%) !default;
+$theme-cyan-200: lighten($theme-cyan, 30%) !default;
+$theme-cyan-300: lighten($theme-cyan, 20%) !default;
+$theme-cyan-400: lighten($theme-cyan, 10%) !default;
+$theme-cyan-500: darken($theme-cyan, 10%) !default;
+$theme-cyan-600: darken($theme-cyan, 20%) !default;
+$theme-cyan-700: darken($theme-cyan, 30%) !default;
+$theme-cyan-800: darken($theme-cyan, 40%) !default;
+
+// default colors
+$colors: (
+  'blue': #004cff,
+  'indigo': #4e00ca,
+  'purple': #8600fb,
+  'pink': #d4146e,
+  'red': #c82334,
+  'orange': #f16407,
+  'yellow': #ffb300,
+  'green': #008040,
+  'teal': #20c997,
+  'cyan': #2a7ab0,
+  'white': #fff,
+  'black': #000,
+  'font': #12171d,
+  'background': #1c2938,
+  'border': #abbbcb,
+) !default;
+
+$blue: map-get($colors, 'blue') !default;
+$indigo: map-get($colors, 'indigo') !default;
+$purple: map-get($colors, 'purple') !default;
+$pink: map-get($colors, 'pink') !default;
+$red: map-get($colors, 'red') !default;
+$orange: map-get($colors, 'orange') !default;
+$yellow: map-get($colors, 'yellow') !default;
+$green: map-get($colors, 'green') !default;
+$teal: map-get($colors, 'teal') !default;
+$cyan: map-get($colors, 'cyan') !default;
+$white: map-get($colors, 'white') !default;
+$font: map-get($colors, 'font') !default;
+$background: map-get($colors, 'background') !default;
+$border: map-get($colors, 'border') !default;
+
+$info-colors: (
+  'primary': map-get($colors, 'blue'),
+  'secondary': map-get($colors, 'background'),
+  'success': map-get($colors, 'green'),
+  'danger': map-get($colors, 'red'),
+  'warning': map-get($colors, 'yellow'),
+  'info': map-get($colors, 'cyan'),
+  'light': lighten(map-get($colors, 'border'), 14%),
+  'dark': map-get($colors, 'black'),
+  'white': map-get($colors, 'white'),
+);
+
+$primary: map-get($colors, 'blue') !default;
+$secondary: map-get($colors, 'background') !default;
+$success: map-get($colors, 'green') !default;
+$danger: map-get($colors, 'red') !default;
+$warning: map-get($colors, 'yellow') !default;
+$info: map-get($colors, 'cyan') !default;
+$light: lighten(map-get($colors, 'border'), 14%) !default;
+$dark: map-get($colors, 'black') !default;
+$white: map-get($colors, 'white') !default;
+
+$blue-100: lighten($blue, 40%) !default;
+$blue-200: lighten($blue, 30%) !default;
+$blue-300: lighten($blue, 20%) !default;
+$blue-400: lighten($blue, 10%) !default;
+$blue-500: darken($blue, 10%) !default;
+$blue-600: darken($blue, 20%) !default;
+$blue-700: darken($blue, 30%) !default;
+$blue-800: darken($blue, 40%) !default;
+
+$indigo-100: lighten($indigo, 40%) !default;
+$indigo-200: lighten($indigo, 30%) !default;
+$indigo-300: lighten($indigo, 20%) !default;
+$indigo-400: lighten($indigo, 10%) !default;
+$indigo-500: darken($indigo, 10%) !default;
+$indigo-600: darken($indigo, 20%) !default;
+$indigo-700: darken($indigo, 30%) !default;
+$indigo-800: darken($indigo, 40%) !default;
+
+$purple-100: lighten($purple, 40%) !default;
+$purple-200: lighten($purple, 30%) !default;
+$purple-300: lighten($purple, 20%) !default;
+$purple-400: lighten($purple, 10%) !default;
+$purple-500: darken($purple, 10%) !default;
+$purple-600: darken($purple, 20%) !default;
+$purple-700: darken($purple, 30%) !default;
+$purple-800: darken($purple, 40%) !default;
+
+$pink-100: lighten($pink, 40%) !default;
+$pink-200: lighten($pink, 30%) !default;
+$pink-300: lighten($pink, 20%) !default;
+$pink-400: lighten($pink, 10%) !default;
+$pink-500: darken($pink, 10%) !default;
+$pink-600: darken($pink, 20%) !default;
+$pink-700: darken($pink, 30%) !default;
+$pink-800: darken($pink, 40%) !default;
+
+$red-100: lighten($red, 40%) !default;
+$red-200: lighten($red, 30%) !default;
+$red-300: lighten($red, 20%) !default;
+$red-400: lighten($red, 10%) !default;
+$red-500: darken($red, 10%) !default;
+$red-600: darken($red, 20%) !default;
+$red-700: darken($red, 30%) !default;
+$red-800: darken($red, 40%) !default;
+
+$orange-100: lighten($orange, 40%) !default;
+$orange-200: lighten($orange, 30%) !default;
+$orange-300: lighten($orange, 20%) !default;
+$orange-400: lighten($orange, 10%) !default;
+$orange-500: darken($orange, 10%) !default;
+$orange-600: darken($orange, 20%) !default;
+$orange-700: darken($orange, 30%) !default;
+$orange-800: darken($orange, 40%) !default;
+
+$yellow-100: lighten($yellow, 40%) !default;
+$yellow-200: lighten($yellow, 30%) !default;
+$yellow-300: lighten($yellow, 20%) !default;
+$yellow-400: lighten($yellow, 10%) !default;
+$yellow-500: darken($yellow, 10%) !default;
+$yellow-600: darken($yellow, 20%) !default;
+$yellow-700: darken($yellow, 30%) !default;
+$yellow-800: darken($yellow, 40%) !default;
+
+$green-100: lighten($green, 40%) !default;
+$green-200: lighten($green, 30%) !default;
+$green-300: lighten($green, 20%) !default;
+$green-400: lighten($green, 10%) !default;
+$green-500: darken($green, 10%) !default;
+$green-600: darken($green, 20%) !default;
+$green-700: darken($green, 30%) !default;
+$green-800: darken($green, 40%) !default;
+
+$teal-100: lighten($teal, 40%) !default;
+$teal-200: lighten($teal, 30%) !default;
+$teal-300: lighten($teal, 20%) !default;
+$teal-400: lighten($teal, 10%) !default;
+$teal-500: darken($teal, 10%) !default;
+$teal-600: darken($teal, 20%) !default;
+$teal-700: darken($teal, 30%) !default;
+$teal-800: darken($teal, 40%) !default;
+
+$cyan-100: lighten($cyan, 40%) !default;
+$cyan-200: lighten($cyan, 30%) !default;
+$cyan-300: lighten($cyan, 20%) !default;
+$cyan-400: lighten($cyan, 10%) !default;
+$cyan-500: darken($cyan, 10%) !default;
+$cyan-600: darken($cyan, 20%) !default;
+$cyan-700: darken($cyan, 30%) !default;
+$cyan-800: darken($cyan, 40%) !default;
+
+$font-100: lighten($font, 75%) !default;
+$font-200: lighten($font, 60%) !default;
+$font-300: lighten($font, 45%) !default;
+$font-400: lighten($font, 30%) !default;
+$font-500: lighten($font, 15%) !default;
+$font-600: $font !default;
+
+$background-100: lighten($background, 80%) !default;
+$background-200: lighten($background, 78%) !default;
+$background-300: lighten($background, 75%) !default;
+$background-400: lighten($background, 70%) !default;
+$background-500: lighten($background, 60%) !default;
+$background-600: lighten($background, 50%) !default;
+$background-700: lighten($background, 40%) !default;
+$background-800: lighten($background, 40%) !default;
+$background-900: lighten($background, 30%) !default;
+$background-1000: lighten($background, 20%) !default;
+$background-1100: lighten($background, 10%) !default;
+
+$border-100: lighten($border, 21%) !default;
+$border-200: lighten($border, 14%) !default;
+$border-300: lighten($border, 7%) !default;
+
+// Z-index
+
+$zindex-sticky: 1000 !default;
+$zindex-fixed: 1010 !default;
+$zindex-modal-backdrop: 1020 !default;
+$zindex-modal: 1030 !default;
+$zindex-dropdown: 1040 !default;
+$zindex-popover: 1050 !default;
+$zindex-tooltip: 1060 !default;
+
+// Spacing
+
+$spacers: (
+  '0': 0px,
+  '4': 4px,
+  '8': 8px,
+  '16': 16px,
+  '24': 24px,
+  '32': 32px,
+  '40': 40px,
+  '48': 48px,
+  '56': 56px,
+  '64': 64px,
+  '72': 72px,
+) !default;
+
+// Font Size
+
+$font-size: (
+  '12': 12px,
+  '14': 14px,
+  '16': 16px,
+  '18': 18px,
+  '20': 20px,
+  '22': 22px,
+  '24': 24px,
+  '26': 26px,
+  '28': 28px,
+  '32': 32px,
+  '40': 40px,
+  '48': 48px,
+  '56': 56px,
+  '72': 72px,
+) !default;
+
+// Size
+$sizes: (
+  'mini': 24,
+  'sm': 32,
+  'default': 40,
+  'lg': 48,
+) !default;
+
+// shadows
+
+$pop-shadow: 0 6px 11px 0 rgba(30, 44, 61, 0.3) !default; // old
+
+$box-shadow-sm: 0 1px 4px 0 rgba(31, 45, 61, 0.15) !default;
+$box-shadow: 0 5px 10px 0 rgba(31, 45, 61, 0.15) !default;
+$box-shadow-lg: 0 10px 20px 0 rgba(31, 45, 61, 0.2) !default;
+$radius: 5px;
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+) !default;
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+) !default;
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+$grid-columns: 12 !default;
+$grid-gutter-width: 30px !default;
+$grid-row-columns: 6 !default;
+
+// Utilities
+
+$displays: none, inline, inline-block, block, table, table-row, table-cell, flex,
+  inline-flex !default;
+$overflows: auto, hidden !default;
+$positions: static, relative, absolute, fixed, sticky !default;
+
+// Printing
+
+$print-page-size: a3 !default;
+$print-body-min-width: map-get($grid-breakpoints, 'lg') !default;
+
+// font weight
+
+$font-weight-lighter: lighter !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 700 !default;
+$font-weight-bolder: bolder !default;
