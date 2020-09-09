@@ -18,6 +18,7 @@
     "js-cookie": "2.2.1",
     "js-file-download": "0.4.11",
     "lodash": "^4.17.20",
+    "mavon-editor": "^2.9.0",
     "moment": "2.24.0",
     "moment-business-days": "1.2.0",
     "moment-timezone": "0.5.28",

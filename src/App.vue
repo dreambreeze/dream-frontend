@@ -2,7 +2,7 @@
   <div id="app">
     <header-bar></header-bar>
     <div class="app-content">
-      <sidebar v-if="showSiderbar"></sidebar>
+      <sidebar v-if="showSideBar"></sidebar>
       <router-view></router-view>
     </div>
     <footer-bar></footer-bar>
@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      showSiderbar: false,
+      showSideBar: false,
     }
   },
 }
@@ -32,5 +32,6 @@ export default {
 @import './assets/style/global.scss';
 .app-content {
   @include left;
+  margin: 80px 16px 0;
 }
 </style>

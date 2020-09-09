@@ -53,15 +53,15 @@ export default {
         },
         {
           label: this.$t('blog'),
-          link: '/blog',
+          link: '/blogs',
         },
         {
           label: this.$t('code'),
-          link: '/code',
+          link: '/codes',
         },
         {
           label: this.$t('link'),
-          link: '/link',
+          link: '/links',
         },
         {
           label: this.$t('about'),
@@ -106,15 +106,14 @@ export default {
   right: 0;
   @include left;
   box-shadow: $box-shadow;
-  background: rgb(207, 204, 201);
-  background-image: url('../../assets/images/texture.png');
+  background: #cfccc9 url('../../assets/images/texture.png');
   .title-wrap {
     @include left;
     cursor: pointer;
     .img-wrap {
       padding: 8px 15px;
       .logo-img {
-        height: 50px;
+        height: 40px;
       }
     }
   }
@@ -132,7 +131,7 @@ export default {
       .menu-link {
         display: inline-block;
         margin: 0 16px 0 0;
-        padding: 12px 16px;
+        padding: 8px 16px;
         border-radius: 5px;
         text-decoration: none;
         color: $font-400;

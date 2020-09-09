@@ -3,9 +3,11 @@
 </template>
 <script>
 export default {
-  name: 'link',
+  name: 'blogs',
   data() {
-    return {}
+    return {
+      blogInfo: '',
+    }
   },
   methods: {},
 }

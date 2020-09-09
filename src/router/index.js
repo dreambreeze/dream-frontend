@@ -16,22 +16,32 @@ export default new Router({
         import(/* webpackChunkName: "home" */ '../views/home/home.vue'),
     },
     {
-      path: '/blog',
-      name: 'blog',
+      path: '/blogs',
+      name: 'blogs',
       component: () =>
-        import(/* webpackChunkName: "blog" */ '../views/blog/blog.vue'),
+        import(/* webpackChunkName: "blog" */ '../views/blog/blogs.vue'),
+      children: [
+        {
+          path: '/blogs/:blogId',
+          name: 'blogDetail',
+          component: () =>
+            import(
+              /* webpackChunkName: "blog" */ '../views/blog/blog-detail/blog-detail.vue'
+            ),
+        },
+      ],
     },
     {
-      path: '/code',
-      name: 'code',
+      path: '/codes',
+      name: 'codes',
       component: () =>
-        import(/* webpackChunkName: "code" */ '../views/code/code.vue'),
+        import(/* webpackChunkName: "code" */ '../views/code/codes.vue'),
     },
     {
-      path: '/link',
-      name: 'link',
+      path: '/links',
+      name: 'links',
       component: () =>
-        import(/* webpackChunkName: "link" */ '../views/link/link.vue'),
+        import(/* webpackChunkName: "link" */ '../views/link/links.vue'),
     },
     {
       path: '/about',

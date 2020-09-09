@@ -7,6 +7,10 @@ import store from './store'
 import i18n from './lang/i18n'
 import '@/utils/axios.js'
 import library from './components/library'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+
+Vue.use(mavonEditor)
 
 Vue.use(VueRouter)
 Vue.use(library)

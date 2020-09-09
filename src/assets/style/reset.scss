@@ -2,7 +2,6 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
 html,
 body,
 div,
@@ -134,7 +133,6 @@ a {
 li {
   list-style: none;
 }
-
 html,
 body {
   width: 100%;
@@ -147,22 +145,20 @@ body {
 html,
 body {
   font-family: 'PingFangSC-Light', 'PingFang SC', 'STHeitiSC-Light',
-    'Helvetica-Light', 'Arial', 'sans-serif';
+  'Helvetica-Light', 'Arial', 'sans-serif';
 }
-
 body {
   position: relative;
   background-image: linear-gradient(
-    to right top,
-    $high-light 50%,
-    transparent 50%
+      to right top,
+      $high-light 50%,
+      transparent 50%
   );
   background-size: 100% calc(100% - 100vh);
   background-repeat: no-repeat;
   background-position: 0 72px;
   z-index: 1;
 }
-
 body::after {
   content: '';
   position: fixed;
@@ -172,4 +168,8 @@ body::after {
   right: 0;
   z-index: -1;
   background: $white;
+}
+
+a,button{
+  cursor:pointer;
 }

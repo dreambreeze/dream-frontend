@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'blog',
+  name: 'links',
   data() {
     return {}
   },
