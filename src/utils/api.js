@@ -1,31 +1,32 @@
+import axios from 'axios'
+
 const http = {
   get: function (path, params) {
-    return this.$http.get(path, {
-      params: params,
+    return axios.get(path, {
+      params: params
     })
   },
   put: function (path, params) {
-    return this.$http.put(path, params)
+    return axios.put(path, params)
   },
   post: function (path, params) {
-    return this.$http.post(path, params)
+    return axios.post(path, params)
   },
   delete: function (path, params) {
-    return this.$http.delete(path, params)
+    return axios.delete(path, params)
   },
   patch: function (path, params) {
-    return this.$http.patch(path, params)
-  },
+    return axios.patch(path, params)
+  }
 }
 
-const baseUrl = ''
+const baseUrl = process.env.VUE_APP_BASE_URL
 
 export default {
 
-  //get collateral call filter
-  getCollateralCallFilter: async function (params) {
-    const res = await http.get(`${baseUrl}/user/getUserInfo`, params)
+  saveArticle: async function (params) {
+    const res = await http.post(`${baseUrl}/system/article`, params)
     return res.data.value
-  },
+  }
 
 }

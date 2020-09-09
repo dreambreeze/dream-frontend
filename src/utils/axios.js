@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import axios from 'axios'
-import router from '../router'
 
 // let appConfig = JSON.parse(sessionStorage.getItem('appConfig'))
 // let productCode = appConfig ? appConfig.productCode : null
@@ -48,9 +47,6 @@ axios.interceptors.response.use(
           toLogin()
           break
         case 404:
-          router.push({
-            path: '/not-found',
-          })
           error.message = 'Not Found'
           break
         case 405:
@@ -120,14 +116,14 @@ const alertError = (data, type = 'error-info') => {
       flag: 'error-info',
       message: msg,
       requestIdInfo: requestId,
-      autoClose: 10000,
+      autoClose: 10000
     })
   } else {
     Vue.prototype.$alert.show({
       flag: 'danger',
       position: 'top',
       message: msg,
-      autoClose: 4000,
+      autoClose: 4000
     })
   }
 }

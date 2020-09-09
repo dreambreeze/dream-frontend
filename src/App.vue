@@ -13,25 +13,28 @@
 import headerBar from './components/header/header-bar'
 import footerBar from './components/footer/footer-bar'
 import sidebar from './components/sidebar/sidebar'
+
 export default {
   name: 'app',
   components: {
     headerBar,
     footerBar,
-    sidebar,
+    sidebar
   },
-  data() {
+  data () {
     return {
-      showSideBar: false,
+      showSideBar: false
     }
-  },
+  }
 }
 </script>
 
 <style lang="scss">
-@import './assets/style/global.scss';
-.app-content {
-  @include left;
-  margin: 80px 16px 0;
-}
+  @import './assets/style/global.scss';
+  .app-content {
+    @include left;
+    margin: 58px 0 0;
+    padding: 24px 16px;
+    min-height: calc(100vh - 166px);
+  }
 </style>

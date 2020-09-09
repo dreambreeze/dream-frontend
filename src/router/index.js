@@ -7,48 +7,65 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home',
+      redirect: '/home'
     },
     {
       path: '/home',
       name: 'home',
       component: () =>
-        import(/* webpackChunkName: "home" */ '../views/home/home.vue'),
+        import(/* webpackChunkName: "home" */ '../views/home/home.vue')
     },
     {
-      path: '/blogs',
-      name: 'blogs',
+      path: '/article',
+      name: 'article',
+      redirect: '/article/article-list',
       component: () =>
-        import(/* webpackChunkName: "blog" */ '../views/blog/blogs.vue'),
+        import(/* webpackChunkName: "home" */ '../views/article/article.vue'),
       children: [
         {
-          path: '/blogs/:blogId',
-          name: 'blogDetail',
+          path: '/article/article-list',
+          name: 'articleList',
           component: () =>
             import(
-              /* webpackChunkName: "blog" */ '../views/blog/blog-detail/blog-detail.vue'
-            ),
+              /* webpackChunkName: "article" */ '../views/article/article-list/article-list'
+              )
         },
-      ],
+        {
+          path: '/article/article-editor',
+          name: 'articleEditor',
+          component: () =>
+            import(
+              /* webpackChunkName: "article" */ '../views/article/article-editor/article-editor'
+              )
+        },
+        {
+          path: '/article/:articleId',
+          name: 'articleDetail',
+          component: () =>
+            import(
+              /* webpackChunkName: "article" */ '../views/article/article-detail/article-detail'
+              )
+        }
+      ]
     },
     {
       path: '/codes',
       name: 'codes',
       component: () =>
-        import(/* webpackChunkName: "code" */ '../views/code/codes.vue'),
+        import(/* webpackChunkName: "code" */ '../views/code/codes.vue')
     },
     {
       path: '/links',
       name: 'links',
       component: () =>
-        import(/* webpackChunkName: "link" */ '../views/link/links.vue'),
+        import(/* webpackChunkName: "link" */ '../views/link/links.vue')
     },
     {
       path: '/about',
       name: 'about',
       component: () =>
-        import(/* webpackChunkName: "about" */ '../views/about/about.vue'),
-    },
+        import(/* webpackChunkName: "about" */ '../views/about/about.vue')
+    }
   ],
-  mode: 'history',
+  mode: 'history'
 })
