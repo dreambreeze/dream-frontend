@@ -1,15 +1,11 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-// let appConfig = JSON.parse(sessionStorage.getItem('appConfig'))
-// let productCode = appConfig ? appConfig.productCode : null
-
 axios.defaults.baseURL = ''
 axios.interceptors.request.use(
   (config) => {
     // set http header
     config.headers['X-Requested-With'] = 'XMLHttpRequest'
-    // config.headers['X-SN-USER-UID'] = '32456475454343'
 
     // timeout
     config.timeout = 20000

@@ -57,19 +57,18 @@ export default {
         subfield: true, // 单双栏模式
         preview: true // 预览
       },
-      content: '',
-      title: ''
+      article: {
+        content: '',
+        title: '',
+        sendIp: ''
+      }
     }
   },
   methods: {
     saveArticle () {
-      let { title, content } = this
-      api.saveArticle({
-        title,
-        content,
-        sendIp: ''
-      }).then(res => {
-        console.log(res)
+      const methods = this.article.articleId ? 'updateArticle' : 'addArticle'
+      api[methods](this.article).then(res => {
+        this.article = res
         this.$router.push(`/article/${res.articleId}`)
       })
     }

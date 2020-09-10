@@ -24,9 +24,12 @@ const baseUrl = process.env.VUE_APP_BASE_URL
 
 export default {
 
-  saveArticle: async function (params) {
+  async addArticle (params) {
+    const res = await http.post(`${baseUrl}/system/article`, params)
+    return res.data.value
+  },
+  async updateArticle (params) {
     const res = await http.post(`${baseUrl}/system/article`, params)
     return res.data.value
   }
-
 }

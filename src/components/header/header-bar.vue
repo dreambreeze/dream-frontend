@@ -34,6 +34,11 @@
           {{ currentLanguage() }}
         </d-button>
       </li>
+      <li class="action-item">
+        <d-button @click.native="changeLanguage" button-type="outline">
+          {{ currentLanguage() }}
+        </d-button>
+      </li>
     </ul>
   </header>
 </template>
