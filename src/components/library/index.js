@@ -1,6 +1,12 @@
-import DButton from './button/button.vue'
+import DButton from './button/d-button'
+import DIcon from './icon/d-icon'
+import DModal from './modal/d-modal'
 
-const components = [DButton]
+const components = [
+  DButton,
+  DIcon,
+  DModal
+]
 
 const install = function (Vue) {
   components.map((component) => {

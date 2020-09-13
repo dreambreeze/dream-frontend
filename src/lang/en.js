@@ -7,4 +7,7 @@ export default {
   simplified_chinese: 'Simplified Chinese',
   english: 'English',
   about: 'About',
+  signIn: 'Sign In',
+  signUp: 'Sign Up',
+  cancel: 'Cancel'
 }

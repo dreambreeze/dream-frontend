@@ -7,4 +7,7 @@ export default {
   simplified_chinese: '简体中文',
   english: '英文',
   about: '关于',
+  signIn: '登陆',
+  signUp: '注册',
+  cancel: '取消'
 }

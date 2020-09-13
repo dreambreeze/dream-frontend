@@ -166,7 +166,7 @@ body::after {
   left: 0;
   top: 0;
   right: 0;
-  background: $white;
+  background: #eef7f2;
   z-index: -1;
 }
 a, button {
@@ -178,7 +178,7 @@ a, button {
 }
 /*滑块*/
 ::-webkit-scrollbar-thumb {
-  background-color: #2D2E36;
+  background-color: #bbb5ac;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {

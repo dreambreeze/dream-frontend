@@ -9,11 +9,13 @@ import '@/utils/axios.js'
 import library from './components/library'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import './assets/style/iconfont/iconfont.css'
 
 Vue.use(mavonEditor)
 
 Vue.use(VueRouter)
 Vue.use(library)
+
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
@@ -21,5 +23,5 @@ new Vue({
   router,
   store,
   i18n,
-  render: (h) => h(App),
+  render: (h) => h(App)
 }).$mount('#app')

@@ -8,7 +8,7 @@
           src="../../assets/images/dreambreeze.png"
         />
       </div>
-      <div :style="{ width: localWidth() }" class="website-name">
+      <div class="website-name">
         <vue-typer
           :pre-type-delay="500"
           :repeat="0"
@@ -30,25 +30,31 @@
     </ul>
     <ul class="action-list">
       <li class="action-item">
-        <d-button @click.native="changeLanguage" button-type="text">
-          {{ currentLanguage() }}
+        <d-button @click.native="showLoginModal = true" button-type="outline-secondary" class="login-btn">
+          {{ $t('signIn') }}
         </d-button>
       </li>
       <li class="action-item">
-        <d-button @click.native="changeLanguage" button-type="outline">
+        <d-button @click.native="changeLanguage" button-type="text" class="change-lang">
           {{ currentLanguage() }}
         </d-button>
       </li>
     </ul>
+    <login-modal
+      @cancel="showLoginModal = false"
+      v-if="showLoginModal"
+    ></login-modal>
   </header>
 </template>
 <script>
 import { VueTyper } from 'vue-typer'
+import loginModal from '../login-modal/login-modal'
 
 export default {
   name: 'header-bar',
   components: {
-    VueTyper
+    VueTyper,
+    loginModal
   },
   data () {
     return {
@@ -75,18 +81,16 @@ export default {
         }
       ],
       language: {
-        cn: '简体中文',
-        en: 'English'
+        cn: 'En',
+        en: '中'
       },
-      localLang: localStorage.getItem('local') || 'cn'
+      localLang: localStorage.getItem('local') || 'cn',
+      showLoginModal: false
     }
   },
   created () {
   },
   methods: {
-    localWidth () {
-      return this.localLang === 'cn' ? '120px' : '160px'
-    },
     currentLanguage () {
       return this.language[this.localLang]
     },
@@ -119,6 +123,7 @@ export default {
     .title-wrap {
       @include left;
       cursor: pointer;
+      width: 220px;
       .img-wrap {
         padding: 8px 15px;
         .logo-img {
@@ -160,9 +165,30 @@ export default {
       }
     }
     .action-list {
-      padding: 0 24px;
+      padding: 0 16px;
+      @include center;
       .action-item {
-        margin: 0 8px 0 0;
+        margin: 0 0 0 16px;
+        .change-lang {
+          border: 1px solid $font-400;
+          color: $font-400;
+          border-radius: 50%;
+          padding: 0 0;
+          font-size: 14px;
+          width: 30px;
+          min-width: 30px;
+          height: 30px;
+          &:hover,
+          &:active {
+            text-decoration: none;
+            border: 1px solid $font-500;
+            color: $font-500;
+          }
+        }
+        .login-btn {
+          height: 30px;
+          font-size: 14px;
+        }
       }
     }
   }
