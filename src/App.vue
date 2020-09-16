@@ -13,6 +13,7 @@
 import headerBar from './components/header/header-bar'
 import footerBar from './components/footer/footer-bar'
 import sidebar from './components/sidebar/sidebar'
+import storeMixin from './mixin/store.mixin'
 
 export default {
   name: 'app',
@@ -21,20 +22,23 @@ export default {
     footerBar,
     sidebar
   },
-  data () {
-    return {
-      showSideBar: false
-    }
-  }
+  mixins: [storeMixin],
 }
 </script>
 
 <style lang="scss">
-  @import './assets/style/global.scss';
-  .app-content {
-    @include left;
-    margin: 58px 0 0;
-    padding: 24px 16px;
-    min-height: calc(100vh - 166px);
-  }
+@import './assets/style/global.scss';
+
+#app {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.app-content {
+  @include left;
+  padding: 24px 16px;
+  background: $month-white;
+  min-height: calc(100vh - 118px);
+}
 </style>

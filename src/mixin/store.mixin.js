@@ -1,16 +1,17 @@
-import { mapGetters, mapActions, mapState, mapMutations } from 'vuex'
+import {mapActions, mapGetters, mapMutations, mapState} from 'vuex'
 
 export default {
   computed: {
     ...mapState({
       showSideBar: 'showSideBar',
-      editorToolbars: 'editorToolbars',
+      locale: 'locale',
     }),
     ...mapGetters({}),
   },
   methods: {
     ...mapMutations({
       setShowSideBar: 'setShowSideBar',
+      setLocale: 'setLocale',
     }),
     ...mapActions({}),
   },

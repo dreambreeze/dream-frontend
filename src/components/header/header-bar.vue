@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div @click="linkTo('/home')" class="title-wrap">
+    <div class="title-wrap" @click="linkTo('/home')">
       <div class="img-wrap">
         <img
           alt="dream-logo"
@@ -18,11 +18,11 @@
       </div>
     </div>
     <ul class="menu-list">
-      <li :key="index" class="menu-item" v-for="(item, index) in menuList">
+      <li v-for="(item, index) in menuList" :key="index" class="menu-item">
         <a
           :class="isActiveLink(item.link)"
-          @click="linkTo(item.link)"
           class="menu-link"
+          @click="linkTo(item.link)"
         >
           {{ item.label }}
         </a>
@@ -30,25 +30,26 @@
     </ul>
     <ul class="action-list">
       <li class="action-item">
-        <d-button @click.native="showLoginModal = true" button-type="outline-secondary" class="login-btn">
+        <d-button button-type="outline-primary" class="login-btn" @click.native="showLoginModal = true">
           {{ $t('signIn') }}
         </d-button>
       </li>
       <li class="action-item">
-        <d-button @click.native="changeLanguage" button-type="text" class="change-lang">
+        <d-button button-type="text" class="change-lang" @click.native="changeLanguage">
           {{ currentLanguage() }}
         </d-button>
       </li>
     </ul>
     <login-modal
-      @cancel="showLoginModal = false"
       v-if="showLoginModal"
+      @cancel="showLoginModal = false"
     ></login-modal>
   </header>
 </template>
 <script>
-import { VueTyper } from 'vue-typer'
+import {VueTyper} from 'vue-typer'
 import loginModal from '../login-modal/login-modal'
+import storeMixin from '../../mixin/store.mixin'
 
 export default {
   name: 'header-bar',
@@ -56,16 +57,26 @@ export default {
     VueTyper,
     loginModal
   },
-  data () {
+  mixins: [storeMixin],
+  data() {
     return {
-      menuList: [
+      language: {
+        cn: 'En',
+        en: '中'
+      },
+      showLoginModal: false
+    }
+  },
+  computed: {
+    menuList() {
+      return [
         {
           label: this.$t('home'),
           link: '/home'
         },
         {
           label: this.$t('blog'),
-          link: '/article/article-list'
+          link: '/article'
         },
         {
           label: this.$t('code'),
@@ -79,117 +90,122 @@ export default {
           label: this.$t('about'),
           link: '/about'
         }
-      ],
-      language: {
-        cn: 'En',
-        en: '中'
-      },
-      localLang: localStorage.getItem('local') || 'cn',
-      showLoginModal: false
-    }
-  },
-  created () {
+      ]
+    },
   },
   methods: {
-    currentLanguage () {
-      return this.language[this.localLang]
+    currentLanguage() {
+      return this.language[this.locale]
     },
-    changeLanguage () {
-      let local = this.localLang === 'cn' ? 'en' : 'cn'
-      localStorage.setItem('local', local)
-      this.$i18n.locale = local
-      window.location.reload()
+    changeLanguage() {
+      let locale = this.locale === 'cn' ? 'en' : 'cn'
+      this.setLocale(locale)
+      this.$i18n.locale = locale
     },
-    isActiveLink (link) {
-      return this.$route.path === link ? 'active-link' : ''
+    isActiveLink(link) {
+      return this.$route.path.indexOf(link) !== -1 ? 'active-link' : ''
     },
-    linkTo (link) {
+    linkTo(link) {
       if (this.$route.path !== link) this.$router.push(link)
     }
   }
 }
 </script>
 <style lang="scss" scoped type="text/scss">
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 58px;
-    z-index: 2009;
+.header {
+  position: sticky;
+  top: 0;
+  height: 58px;
+  z-index: 2009;
+  @include left;
+  box-shadow: $box-shadow;
+  background: $white;
+
+  .title-wrap {
     @include left;
-    box-shadow: $box-shadow;
-    background: #CFCCC9 url('../../assets/images/texture.png');
-    .title-wrap {
-      @include left;
+    cursor: pointer;
+    width: 220px;
+
+    .img-wrap {
+      padding: 8px 15px;
+
+      .logo-img {
+        height: 40px;
+      }
+    }
+  }
+
+  .website-name {
+    font-size: 20px;
+
+    .vue-typer {
       cursor: pointer;
-      width: 220px;
-      .img-wrap {
-        padding: 8px 15px;
-        .logo-img {
-          height: 40px;
-        }
-      }
     }
-    .website-name {
-      font-size: 20px;
-      .vue-typer {
-        cursor: pointer;
-      }
-    }
-    .menu-list {
-      list-style: none;
-      flex: 1;
-      @include left;
-      .menu-item {
-        .menu-link {
-          display: inline-block;
-          margin: 0 16px 0 0;
-          padding: 8px 16px;
-          border-radius: 5px;
-          text-decoration: none;
-          color: $font-400;
-          border: 2px solid transparent;
-          &.active-link {
-            background: rgb(167, 168, 189);
-            color: $white;
-          }
-          &:hover {
-            background: rgb(167, 168, 189);
-            color: $white;
-          }
-          &:active {
-            border: $border 2px solid;
-          }
+  }
+
+  .menu-list {
+    list-style: none;
+    flex: 1;
+    @include left;
+
+    .menu-item {
+      .menu-link {
+        display: inline-block;
+        margin: 0 16px 0 0;
+        padding: 4px 16px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: $font-400;
+        border: 2px solid transparent;
+
+        &.active-link {
+          background: $theme-primary;
+          color: $white;
         }
-      }
-    }
-    .action-list {
-      padding: 0 16px;
-      @include center;
-      .action-item {
-        margin: 0 0 0 16px;
-        .change-lang {
-          border: 1px solid $font-400;
-          color: $font-400;
-          border-radius: 50%;
-          padding: 0 0;
-          font-size: 14px;
-          width: 30px;
-          min-width: 30px;
-          height: 30px;
-          &:hover,
-          &:active {
-            text-decoration: none;
-            border: 1px solid $font-500;
-            color: $font-500;
-          }
+
+        &:hover {
+          background: $theme-primary;
+          color: $white;
         }
-        .login-btn {
-          height: 30px;
-          font-size: 14px;
+
+        &:active {
+          border: $border 2px solid;
         }
       }
     }
   }
+
+  .action-list {
+    padding: 0 16px;
+    @include center;
+
+    .action-item {
+      margin: 0 0 0 16px;
+
+      .change-lang {
+        border: 1px solid $font-400;
+        color: $font-400;
+        border-radius: 50%;
+        padding: 0 0;
+        font-size: 14px;
+        width: 30px;
+        min-width: 30px;
+        height: 30px;
+        text-decoration: none;
+
+        &:hover,
+        &:active {
+          text-decoration: none;
+          border: 1px solid $font-500;
+          color: $font-500;
+        }
+      }
+
+      .login-btn {
+        height: 30px;
+        font-size: 14px;
+      }
+    }
+  }
+}
 </style>

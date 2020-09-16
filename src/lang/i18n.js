@@ -1,20 +1,21 @@
 import Vue from 'vue'
 import VueI18N from 'vue-i18n'
-import en from './en'
 import cn from './cn'
+import en from './en'
 
 Vue.use(VueI18N)
 
 const messages = {
-  en,
   cn,
+  en,
 }
 
-let locale = localStorage.getItem('local')
+let locale = localStorage.getItem('locale')
 if (!locale) {
   locale = 'cn'
-  localStorage.getItem('local', locale)
+  localStorage.setItem('locale', locale)
 }
+console.log(locale)
 
 const i18n = new VueI18N({
   locale,

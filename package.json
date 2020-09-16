@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "ant-design-vue": "^1.6.5",
     "async-validator": "^3.4.0",
     "axios": "^0.19.2",
     "bignumber.js": "9.0.0",
@@ -17,6 +18,8 @@
     "js-base64": "2.5.2",
     "js-cookie": "2.2.1",
     "js-file-download": "0.4.11",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.1",
     "lodash": "^4.17.20",
     "mavon-editor": "2.9.0",
     "moment": "2.24.0",

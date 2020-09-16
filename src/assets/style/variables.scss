@@ -1,5 +1,6 @@
 // theme color
 $theme: (
+  'gray': #CFCCC9,
   'blue': #004cff,
   'indigo': #4e00ca,
   'purple': #8600fb,
@@ -12,9 +13,10 @@ $theme: (
   'cyan': #2a7ab0,
   'dark': #121b25,
 );
-$color: rgb(207, 204, 201);
-$high-light: rgb(46, 49, 124);
+$month-white: #fffef8;
+$theme-primary: #44668c;
 // theme
+$theme-gray: map-get($theme, 'gray') !default;
 $theme-blue: map-get($theme, 'blue') !default;
 $theme-indigo: map-get($theme, 'indigo') !default;
 $theme-purple: map-get($theme, 'purple') !default;

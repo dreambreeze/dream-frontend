@@ -18,12 +18,11 @@ export default new Router({
     {
       path: '/article',
       name: 'article',
-      redirect: '/article/article-list',
       component: () =>
         import(/* webpackChunkName: "home" */ '../views/article/article.vue'),
       children: [
         {
-          path: '/article/article-list',
+          path: '/article',
           name: 'articleList',
           component: () =>
             import(

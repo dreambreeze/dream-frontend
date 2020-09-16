@@ -3,7 +3,7 @@ import axios from 'axios'
 const http = {
   get: function (path, params) {
     return axios.get(path, {
-      params: params
+      params: params,
     })
   },
   put: function (path, params) {
@@ -17,19 +17,29 @@ const http = {
   },
   patch: function (path, params) {
     return axios.patch(path, params)
-  }
+  },
 }
 
 const baseUrl = process.env.VUE_APP_BASE_URL
 
 export default {
-
-  async addArticle (params) {
+  async addArticle(params) {
     const res = await http.post(`${baseUrl}/system/article`, params)
     return res.data.value
   },
-  async updateArticle (params) {
+
+  async updateArticle(params) {
     const res = await http.post(`${baseUrl}/system/article`, params)
     return res.data.value
-  }
+  },
+
+  async signIn(params) {
+    const res = await http.post(`${baseUrl}/system/article`, params)
+    return res.data.value
+  },
+
+  async signUp(params) {
+    const res = await http.post(`${baseUrl}/system/article`, params)
+    return res.data.value
+  },
 }
