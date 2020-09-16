@@ -34,12 +34,17 @@ export default {
   },
 
   async signIn(params) {
-    const res = await http.post(`${baseUrl}/system/article`, params)
+    const res = await http.post(`${baseUrl}/system/user/login`, params)
     return res.data.value
   },
 
   async signUp(params) {
-    const res = await http.post(`${baseUrl}/system/article`, params)
+    const res = await http.post(`${baseUrl}/system/user/register`, params)
+    return res.data.value
+  },
+
+  async logout(params) {
+    const res = await http.post(`${baseUrl}/system/user/logout`, params)
     return res.data.value
   },
 }

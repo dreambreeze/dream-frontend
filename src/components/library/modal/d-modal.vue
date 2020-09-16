@@ -63,7 +63,7 @@ export default {
 .d-modal-wrap {
   @include fullFixed;
   min-width: 350px;
-  z-index: 2009;
+  z-index: 801;
 
   .d-modal-mask {
     @include fullFixed;

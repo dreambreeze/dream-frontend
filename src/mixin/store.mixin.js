@@ -5,6 +5,7 @@ export default {
     ...mapState({
       showSideBar: 'showSideBar',
       locale: 'locale',
+      userInfo: 'userInfo',
     }),
     ...mapGetters({}),
   },
@@ -12,6 +13,7 @@ export default {
     ...mapMutations({
       setShowSideBar: 'setShowSideBar',
       setLocale: 'setLocale',
+      setUserInfo: 'setUserInfo',
     }),
     ...mapActions({}),
   },

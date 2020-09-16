@@ -9,5 +9,8 @@ export default {
   about: '关于',
   signIn: '登录',
   signUp: '注册',
-  cancel: '取消'
+  cancel: '取消',
+  please_enter_user_name: '请输入用户名',
+  please_enter_password: '请输入密码',
+  this_field_can_not_blank: '此字段不能为空',
 }

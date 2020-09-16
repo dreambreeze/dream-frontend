@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
+import {duration} from "./enum"
 
 axios.defaults.baseURL = ''
 axios.interceptors.request.use(
@@ -53,7 +54,7 @@ axios.interceptors.response.use(
           break
         case 500:
           if (error.response.data) {
-            alertError(error.response.data, 'danger')
+            alertError(error.response.data)
           }
           error.message = 'Internal Server Error'
           break
@@ -98,30 +99,15 @@ const toLogin = () => {
  * @messeage error info
  * @return $alert pop-up window
  */
-const alertError = (data, type = 'error-info') => {
+const alertError = (data) => {
   let msg = ''
-  let requestId = ''
   if (data) {
     msg = `${data.message}`
-    requestId = `Request ID: ${data.requestId ? data.requestId : ''} Code: ${
-      data.code ? data.code : ''
-    }`
   }
-  if (type === 'error-info') {
-    Vue.prototype.$alert.show({
-      flag: 'error-info',
-      message: msg,
-      requestIdInfo: requestId,
-      autoClose: 10000
-    })
-  } else {
-    Vue.prototype.$alert.show({
-      flag: 'danger',
-      position: 'top',
-      message: msg,
-      autoClose: 4000
-    })
-  }
+  Vue.prototype.$message.error({
+    content: msg,
+    duration
+  })
 }
 
 export default axios

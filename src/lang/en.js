@@ -9,5 +9,8 @@ export default {
   about: 'About',
   signIn: 'Sign In',
   signUp: 'Sign Up',
-  cancel: 'Cancel'
+  cancel: 'Cancel',
+  please_enter_user_name: 'Please enter user name',
+  please_enter_password: 'Please enter password',
+  this_field_can_not_blank: 'This field can not blank',
 }

@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {getLocaleStorage, getUserInfoStorage, setLocaleStorage, setUserInfoStorage} from '../utils/storage'
+
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     showSideBar: false,
-    locale: localStorage.getItem('locale') || 'cn',
+    locale: getLocaleStorage() || 'cn',
+    userInfo: getUserInfoStorage() || {},
   },
   getters: {},
   mutations: {
@@ -14,8 +17,12 @@ export default new Vuex.Store({
       state.showSideBar = data
     },
     setLocale(state, data) {
-      localStorage.setItem('locale', data)
+      setLocaleStorage(data)
       state.locale = data
+    },
+    setUserInfo(state, data) {
+      setUserInfoStorage(data)
+      state.userInfo = data
     },
   },
   actions: {}

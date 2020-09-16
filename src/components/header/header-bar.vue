@@ -116,7 +116,7 @@ export default {
   position: sticky;
   top: 0;
   height: 58px;
-  z-index: 2009;
+  z-index: 800;
   @include left;
   box-shadow: $box-shadow;
   background: $white;
