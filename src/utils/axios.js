@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
-import {duration} from "./enum"
+import {duration} from './enum'
+import _ from 'lodash'
 
 axios.defaults.baseURL = ''
 axios.interceptors.request.use(
@@ -32,6 +33,13 @@ axios.interceptors.response.use(
     if (error && error.response) {
       switch (error.response.status) {
         case 400:
+          if (
+            error.response.data.code &&
+            (_.toString(error.response.data.code).indexOf('2000') !== -1 ||
+              _.toString(error.response.data.code).indexOf('7000') !== -1)
+          ) {
+            Vue.prototype.$openLogin()
+          }
           if (error.response.data) {
             alertError(error.response.data)
           }
@@ -85,14 +93,7 @@ axios.interceptors.response.use(
   }
 )
 const toLogin = () => {
-  if (
-    process.env.NODE_ENV === 'development' &&
-    window.location.hostname === 'localhost'
-  ) {
-    // window.location.reload()
-  } else {
-    window.location.href = '/auth/login'
-  }
+  window.location.href = '/auth/login'
 }
 /**
  * show error info
@@ -106,7 +107,7 @@ const alertError = (data) => {
   }
   Vue.prototype.$message.error({
     content: msg,
-    duration
+    duration,
   })
 }
 

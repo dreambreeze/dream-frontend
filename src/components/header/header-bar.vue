@@ -30,41 +30,58 @@
     </ul>
     <ul class="action-list">
       <li class="action-item">
-        <d-button button-type="outline-primary" class="login-btn" @click.native="showLoginModal = true">
-          {{ $t('signIn') }}
+        <d-button
+          v-if="!hasLogin"
+          button-type="outline-primary"
+          class="login-btn"
+          @click.native="setShowLoginModal"
+        >
+          {{ $t('sign_in') }}
+        </d-button>
+        <d-button
+          v-else
+          button-type="outline-primary"
+          class="login-btn"
+          @click.native="logout"
+        >
+          {{ $t('logout') }}
         </d-button>
       </li>
       <li class="action-item">
-        <d-button button-type="text" class="change-lang" @click.native="changeLanguage">
+        <d-button
+          button-type="text"
+          class="change-lang"
+          @click.native="changeLanguage"
+        >
           {{ currentLanguage() }}
         </d-button>
       </li>
     </ul>
     <login-modal
       v-if="showLoginModal"
-      @cancel="showLoginModal = false"
+      @close="closeLogin"
     ></login-modal>
   </header>
 </template>
 <script>
 import {VueTyper} from 'vue-typer'
 import loginModal from '../login-modal/login-modal'
-import storeMixin from '../../mixin/store.mixin'
+import storeMixin from '@/mixin/store.mixin'
+import api from '@/utils/api'
 
 export default {
   name: 'header-bar',
   components: {
     VueTyper,
-    loginModal
+    loginModal,
   },
   mixins: [storeMixin],
   data() {
     return {
       language: {
         cn: 'En',
-        en: '中'
+        en: '中',
       },
-      showLoginModal: false
     }
   },
   computed: {
@@ -72,28 +89,31 @@ export default {
       return [
         {
           label: this.$t('home'),
-          link: '/home'
+          link: '/home',
         },
         {
           label: this.$t('blog'),
-          link: '/article'
+          link: '/article',
         },
         {
           label: this.$t('code'),
-          link: '/codes'
+          link: '/codes',
         },
         {
           label: this.$t('link'),
-          link: '/links'
+          link: '/links',
         },
         {
           label: this.$t('about'),
-          link: '/about'
-        }
+          link: '/about',
+        },
       ]
     },
   },
   methods: {
+    closeLogin() {
+      this.setShowLoginModal(false)
+    },
     currentLanguage() {
       return this.language[this.locale]
     },
@@ -107,8 +127,15 @@ export default {
     },
     linkTo(link) {
       if (this.$route.path !== link) this.$router.push(link)
+    },
+    logout() {
+      api.logout().then(() => {
+        this.setHasLogin(false)
+        this.setUserInfo(null)
+        window.location.reload()
+      })
     }
-  }
+  },
 }
 </script>
 <style lang="scss" scoped type="text/scss">

@@ -34,7 +34,7 @@ export default {
   },
 
   async signIn(params) {
-    const res = await http.post(`${baseUrl}/system/user/login`, params)
+    const res = await http.post(`${baseUrl}/system/auth/login`, params)
     return res.data.value
   },
 
@@ -43,8 +43,7 @@ export default {
     return res.data.value
   },
 
-  async logout(params) {
-    const res = await http.post(`${baseUrl}/system/user/logout`, params)
-    return res.data.value
+  logout() {
+    return http.get(`${baseUrl}/system/auth/logout`)
   },
 }

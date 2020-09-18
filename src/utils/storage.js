@@ -4,6 +4,14 @@
  *@date 2020/9/16 22:46
  */
 
+function getHasLoginStorage() {
+  return JSON.parse(sessionStorage.getItem('hasLogin'))
+}
+
+function setHasLoginStorage(hasLogin) {
+  sessionStorage.setItem('hasLogin', JSON.stringify(hasLogin))
+}
+
 function getUserInfoStorage() {
   return JSON.parse(sessionStorage.getItem('userInfo'))
 }
@@ -22,6 +30,8 @@ function setLocaleStorage(locale) {
 
 
 export {
+  getHasLoginStorage,
+  setHasLoginStorage,
   getUserInfoStorage,
   setUserInfoStorage,
   getLocaleStorage,

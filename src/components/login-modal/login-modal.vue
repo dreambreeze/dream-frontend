@@ -9,7 +9,7 @@
           icon="close-circle"
           shape="circle"
           size="large"
-          @click.native="cancel"
+          @click.native="close"
         />
         <a-form-model
           ref="formModal"
@@ -32,8 +32,22 @@
               size="large"
             />
           </a-form-model-item>
+          <a-form-model-item v-if="!isSignIn" has-feedback prop="confirm">
+            <a-input-password
+              v-model="modal.confirm"
+              :placeholder="$t('please_confirm_password')"
+              size="large"
+            />
+          </a-form-model-item>
         </a-form-model>
         <div class="btn-box">
+          <d-button
+            :loading="loading"
+            button-type="text"
+            class="to-btn"
+            @click.native="isSignIn = !isSignIn"
+          >{{ goToText }}
+          </d-button>
           <d-button
             :loading="loading"
             button-type="outline-primary"
@@ -55,6 +69,29 @@ export default {
   name: 'login-modal',
   mixins: [storeMixin, ruleMixin],
   data() {
+    const validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(
+          new Error(this.$lodash.toString(this.$t('please_enter_password')))
+        )
+      } else {
+        if (this.modal.confirm !== '') {
+          this.$refs.formModal.validateField('confirm')
+        }
+        callback()
+      }
+    }
+    const confirmPass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$lodash.toString(this.$t('please_input_the_password_again'))))
+      } else if (value !== this.modal.password) {
+        callback(
+          new Error(this.$lodash.toString(this.$t('two_inputs_dont_match')))
+        )
+      } else {
+        callback()
+      }
+    }
     return {
       wrapperCol: {span: 24},
       isSignIn: true,
@@ -62,23 +99,26 @@ export default {
       modal: {
         name: '',
         password: '',
+        confirm: '',
+      },
+      rules: {
+        name: [this.validRequire(this.$t('please_enter_user_name'))],
+        password: [{validator: validatePass, trigger: 'change'}],
+        confirm: [{validator: confirmPass, trigger: 'change'}],
       },
     }
   },
   computed: {
-    rules() {
-      return {
-        name: [this.validRequire(this.$t('please_enter_user_name'))],
-        password: [this.validRequire(this.$t('please_enter_password'))],
-      }
-    },
     title() {
-      return this.isSignIn ? this.$t('signIn') : this.$t('signUp')
+      return this.isSignIn ? this.$t('sign_in') : this.$t('sign_up')
+    },
+    goToText() {
+      return !this.isSignIn ? this.$t('to_sign_in') : this.$t('to_sign_up')
     },
   },
   methods: {
-    cancel() {
-      this.$emit('cancel')
+    close() {
+      this.$emit('close')
     },
     submit() {
       this.isSignIn ? this.signIn() : this.signUp()
@@ -87,13 +127,18 @@ export default {
       this.$refs.formModal.validate((valid) => {
         if (!valid) return
         this.loading = true
+        let loginUser = {...this.modal}
+        delete loginUser.confirm
         api
-          .signIn(this.modal)
+          .signIn(loginUser)
           .then((res) => {
             this.setUserInfo(res)
-            this.cancel()
+            this.setHasLogin(true)
+            this.close()
           })
           .finally(() => {
+            this.setHasLogin(true)
+            this.modal.password = ''
             this.loading = false
           })
       })
@@ -103,9 +148,12 @@ export default {
         if (!valid) return
         this.loading = true
         api
-          .signIn(this.modal)
-          .then((res) => {
-            this.setUserInfo(res)
+          .signUp(this.modal)
+          .then(res => {
+            this.$message.success({
+              content: this.$t('successful_operation')
+            })
+            this.signIn(res)
           })
           .finally(() => {
             this.loading = false
@@ -141,6 +189,10 @@ export default {
       text-align: center;
       padding: 0 0 18px 0;
       font-size: 18px;
+    }
+
+    .to-btn {
+      font-size: 14px;
     }
 
     .close-btn {

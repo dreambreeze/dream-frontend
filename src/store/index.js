@@ -1,20 +1,35 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {getLocaleStorage, getUserInfoStorage, setLocaleStorage, setUserInfoStorage} from '../utils/storage'
-
+import {
+  getHasLoginStorage,
+  getLocaleStorage,
+  getUserInfoStorage,
+  setHasLoginStorage,
+  setLocaleStorage,
+  setUserInfoStorage,
+} from '../utils/storage'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
+    hasLogin: getHasLoginStorage() || false,
     showSideBar: false,
+    showLoginModal: false,
     locale: getLocaleStorage() || 'cn',
-    userInfo: getUserInfoStorage() || {},
+    userInfo: getUserInfoStorage() || null,
   },
   getters: {},
   mutations: {
+    setHasLogin(state, data) {
+      setHasLoginStorage(data)
+      state.hasLogin = data
+    },
     setShowSideBar(state, data) {
       state.showSideBar = data
+    },
+    setShowLoginModal(state, data = true) {
+      state.showLoginModal = data
     },
     setLocale(state, data) {
       setLocaleStorage(data)
@@ -25,5 +40,8 @@ export default new Vuex.Store({
       state.userInfo = data
     },
   },
-  actions: {}
+  actions: {},
 })
+
+
+export default store
