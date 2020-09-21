@@ -64,6 +64,8 @@
 import api from '../../utils/api'
 import storeMixin from '../../mixin/store.mixin'
 import ruleMixin from '../../mixin/rules.mixin'
+import crypt from '@/utils/crypt'
+import _ from 'lodash'
 
 export default {
   name: 'login-modal',
@@ -72,7 +74,7 @@ export default {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(
-          new Error(this.$lodash.toString(this.$t('please_enter_password')))
+          new Error(_.toString(this.$t('please_enter_password')))
         )
       } else {
         if (this.modal.confirm !== '') {
@@ -83,10 +85,10 @@ export default {
     }
     const confirmPass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error(this.$lodash.toString(this.$t('please_input_the_password_again'))))
+        callback(new Error(_.toString(this.$t('please_input_the_password_again'))))
       } else if (value !== this.modal.password) {
         callback(
-          new Error(this.$lodash.toString(this.$t('two_inputs_dont_match')))
+          new Error(_.toString(this.$t('two_inputs_dont_match')))
         )
       } else {
         callback()
@@ -115,6 +117,12 @@ export default {
     goToText() {
       return !this.isSignIn ? this.$t('to_sign_in') : this.$t('to_sign_up')
     },
+    saveModal() {
+      let user = {...this.modal}
+      delete user.confirm
+      user.password = crypt.encrypt(_.trim(user.password)).toString()
+      return user
+    },
   },
   methods: {
     close() {
@@ -127,11 +135,10 @@ export default {
       this.$refs.formModal.validate((valid) => {
         if (!valid) return
         this.loading = true
-        let loginUser = {...this.modal}
-        delete loginUser.confirm
         api
-          .signIn(loginUser)
+          .signIn(this.saveModal)
           .then((res) => {
+            res.password = crypt.decrypt(res.password)
             this.setUserInfo(res)
             this.setHasLogin(true)
             this.close()
@@ -148,11 +155,12 @@ export default {
         if (!valid) return
         this.loading = true
         api
-          .signUp(this.modal)
+          .signUp(this.saveModal)
           .then(res => {
             this.$message.success({
               content: this.$t('successful_operation')
             })
+            res.password = crypt.decrypt(res.password)
             this.signIn(res)
           })
           .finally(() => {
