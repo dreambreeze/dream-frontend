@@ -8,6 +8,7 @@ export default {
       showLoginModal: 'showLoginModal',
       locale: 'locale',
       userInfo: 'userInfo',
+      sortList: 'sortList',
     }),
     ...mapGetters({}),
   },
@@ -18,7 +19,10 @@ export default {
       setShowLoginModal: 'setShowLoginModal',
       setLocale: 'setLocale',
       setUserInfo: 'setUserInfo',
+      setSortList: 'setSortList',
     }),
-    ...mapActions({}),
+    ...mapActions({
+      getSortList: 'getSortList'
+    }),
   },
 }

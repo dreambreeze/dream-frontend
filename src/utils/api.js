@@ -46,4 +46,19 @@ export default {
   logout() {
     return http.get(`${baseUrl}/system/auth/logout`)
   },
+
+  async getSortList(params) {
+    const res = await http.get(`${baseUrl}/system/sort/all`, params)
+    return res.data.value
+  },
+
+  async addSort(params) {
+    const res = await http.post(`${baseUrl}/system/sort`, params)
+    return res.data.value
+  },
+
+  async updateSort(params) {
+    const res = await http.patch(`${baseUrl}/system/sort`, params)
+    return res.data.value
+  },
 }

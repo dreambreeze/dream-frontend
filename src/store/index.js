@@ -8,6 +8,8 @@ import {
   setLocaleStorage,
   setUserInfoStorage,
 } from '../utils/storage'
+import api from "@/utils/api";
+import {sortEnum} from "@/utils/enum";
 
 Vue.use(Vuex)
 
@@ -18,6 +20,7 @@ const store = new Vuex.Store({
     showLoginModal: false,
     locale: getLocaleStorage() || 'cn',
     userInfo: getUserInfoStorage() || null,
+    sortList: [],
   },
   getters: {},
   mutations: {
@@ -39,8 +42,16 @@ const store = new Vuex.Store({
       setUserInfoStorage(data)
       state.userInfo = data
     },
+    setSortList(state, data) {
+      state.sortList = data
+    },
   },
-  actions: {},
+  actions: {
+    async getSortList(context) {
+      let res = await api.getSortList({type: sortEnum.article})
+      context.commit('setSortList', res)
+    },
+  },
 })
 
 

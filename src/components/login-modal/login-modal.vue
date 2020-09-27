@@ -104,7 +104,12 @@ export default {
         confirm: '',
       },
       rules: {
-        name: [this.validRequire(this.$t('please_enter_user_name'))],
+        name: [this.validRequire(this.$t('please_enter_user_name')), {
+          min: 2,
+          max: 16,
+          message: 'Length should be 3 to 16',
+          trigger: 'blur'
+        },],
         password: [{validator: validatePass, trigger: 'change'}],
         confirm: [{validator: confirmPass, trigger: 'change'}],
       },

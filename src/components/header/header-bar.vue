@@ -19,42 +19,50 @@
     </div>
     <ul class="menu-list">
       <li v-for="(item, index) in menuList" :key="index" class="menu-item">
-        <a
+        <a-button
           :class="isActiveLink(item.link)"
           class="menu-link"
           @click="linkTo(item.link)"
         >
           {{ item.label }}
-        </a>
+        </a-button>
       </li>
     </ul>
     <ul class="action-list">
       <li class="action-item">
-        <d-button
+        <a-button
+          icon="form"
+          icon-only
+          shape="circle"
+          @click.native="linkToWrite"
+        >
+        </a-button>
+      </li>
+      <li class="action-item">
+        <a-button
           v-if="!hasLogin"
           button-type="outline-primary"
           class="login-btn"
           @click.native="setShowLoginModal"
         >
           {{ $t('sign_in') }}
-        </d-button>
-        <d-button
+        </a-button>
+        <a-button
           v-else
           button-type="outline-primary"
           class="login-btn"
           @click.native="logout"
         >
           {{ $t('logout') }}
-        </d-button>
+        </a-button>
       </li>
       <li class="action-item">
-        <d-button
-          button-type="text"
-          class="change-lang"
+        <a-button
+          shape="circle"
           @click.native="changeLanguage"
         >
           {{ currentLanguage() }}
-        </d-button>
+        </a-button>
       </li>
     </ul>
     <login-modal
@@ -128,6 +136,9 @@ export default {
     linkTo(link) {
       if (this.$route.path !== link) this.$router.push(link)
     },
+    linkToWrite() {
+      this.$router.push('/article/article-editor')
+    },
     logout() {
       api.logout().then(() => {
         this.setHasLogin(false)
@@ -145,7 +156,7 @@ export default {
   height: 58px;
   z-index: 800;
   @include left;
-  box-shadow: $box-shadow;
+  box-shadow: $box-shadow-sm;
   background: $white;
 
   .title-wrap {
@@ -184,6 +195,7 @@ export default {
         text-decoration: none;
         color: $font-400;
         border: 2px solid transparent;
+        box-shadow: none;
 
         &.active-link {
           background: $theme-primary;
@@ -193,10 +205,6 @@ export default {
         &:hover {
           background: $theme-primary;
           color: $white;
-        }
-
-        &:active {
-          border: $border 2px solid;
         }
       }
     }
@@ -226,11 +234,6 @@ export default {
           border: 1px solid $font-500;
           color: $font-500;
         }
-      }
-
-      .login-btn {
-        height: 30px;
-        font-size: 14px;
       }
     }
   }

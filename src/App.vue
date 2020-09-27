@@ -36,9 +36,14 @@ export default {
 }
 
 .app-content {
-  @include left;
-  padding: 24px 16px;
+  @include center;
   background: $month-white;
   min-height: calc(100vh - 118px);
+
+  .v-note-wrapper {
+    z-index: 1;
+  }
 }
+
+
 </style>

@@ -35,7 +35,7 @@ axios.interceptors.response.use(
         case 400:
           if (
             error.response.data.code &&
-            (_.toString(error.response.data.code).indexOf('2000') !== -1 ||
+            (_.toString(error.response.data.code).indexOf('20001') !== -1 ||
               _.toString(error.response.data.code).indexOf('7000') !== -1)
           ) {
             Vue.prototype.$openLogin()

@@ -20,7 +20,7 @@ export default {
   right: 0;
   height: 60px;
   @include center;
-  box-shadow: 0 -5px 10px 0 rgba(31, 45, 61, 0.1);
+  box-shadow: 0 -1px 4px 0 rgba(31, 45, 61, 0.1);
   background: $white;
 }
 

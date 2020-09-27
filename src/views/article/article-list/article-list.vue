@@ -1,12 +1,11 @@
 <template>
-      <div class="blog-list">
-        
-      </div>
+  <div class="article-list">
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'blog-list'
+  name: 'article-list'
 }
 </script>
 

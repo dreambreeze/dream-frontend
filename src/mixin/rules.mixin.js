@@ -16,6 +16,11 @@ export default {
         })
       })
     },
+    successHandler() {
+      this.$message.success({
+        content: this.$t("successful_operation")
+      })
+    },
     validRequire(message = this.$t('this_field_can_not_blank'), trigger = '') {
       return {
         required: true,
