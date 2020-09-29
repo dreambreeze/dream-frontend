@@ -10,9 +10,6 @@ export default {
 }
 </script>
 
-<style lang="scss" type="text/scss" scoped>
-.about-content {
-  height: 300vh;
-  width: 100vw;
-}
+<style lang="scss" scoped type="text/scss">
+
 </style>

@@ -23,6 +23,11 @@ const http = {
 const baseUrl = process.env.VUE_APP_BASE_URL
 
 export default {
+  async getArticleDetail(articleId) {
+    const res = await http.get(`${baseUrl}/system/article/${articleId}`)
+    return res.data.value
+  },
+
   async addArticle(params) {
     const res = await http.post(`${baseUrl}/system/article`, params)
     return res.data.value

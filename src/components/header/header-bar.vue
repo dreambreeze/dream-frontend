@@ -30,12 +30,14 @@
     </ul>
     <ul class="action-list">
       <li class="action-item">
-        <a-button
-          icon="form"
-          icon-only
-          shape="circle"
-          @click.native="linkToWrite"
-        >
+        <a-button type="primary" @click.native="linkToWrite">
+          {{ $t('write_article') }}
+          <a-icon type="form"></a-icon>
+        </a-button>
+      </li>
+      <li class="action-item">
+        <a-button shape="circle" @click.native="changeLanguage">
+          {{ currentLanguage() }}
         </a-button>
       </li>
       <li class="action-item">
@@ -47,49 +49,39 @@
         >
           {{ $t('sign_in') }}
         </a-button>
-        <a-button
-          v-else
-          button-type="outline-primary"
-          class="login-btn"
-          @click.native="logout"
-        >
-          {{ $t('logout') }}
-        </a-button>
-      </li>
-      <li class="action-item">
-        <a-button
-          shape="circle"
-          @click.native="changeLanguage"
-        >
-          {{ currentLanguage() }}
+        <a-button v-else class="none-border" @click.native="isShowUserAction = true">
+          <span class="user-info-icon">
+            <a-avatar :src-set="this.userInfo.avatar" class="user-back" icon="user"/>
+            {{ this.userInfo.name }}
+          </span>
         </a-button>
       </li>
     </ul>
-    <login-modal
-      v-if="showLoginModal"
-      @close="closeLogin"
-    ></login-modal>
+    <login-modal v-if="showLoginModal" @close="closeLogin"></login-modal>
+    <user-action :isShow="isShowUserAction" @close="isShowUserAction = false"></user-action>
   </header>
 </template>
 <script>
 import {VueTyper} from 'vue-typer'
 import loginModal from '../login-modal/login-modal'
+import userAction from '../user-action/user-action'
 import storeMixin from '@/mixin/store.mixin'
-import api from '@/utils/api'
 
 export default {
   name: 'header-bar',
   components: {
     VueTyper,
     loginModal,
+    userAction
   },
   mixins: [storeMixin],
   data() {
     return {
-      language: {
+      languageText: {
         cn: 'En',
         en: '中',
       },
+      isShowUserAction: false
     }
   },
   computed: {
@@ -123,7 +115,7 @@ export default {
       this.setShowLoginModal(false)
     },
     currentLanguage() {
-      return this.language[this.locale]
+      return this.languageText[this.locale]
     },
     changeLanguage() {
       let locale = this.locale === 'cn' ? 'en' : 'cn'
@@ -139,13 +131,6 @@ export default {
     linkToWrite() {
       this.$router.push('/article/article-editor')
     },
-    logout() {
-      api.logout().then(() => {
-        this.setHasLogin(false)
-        this.setUserInfo(null)
-        window.location.reload()
-      })
-    }
   },
 }
 </script>
@@ -235,6 +220,22 @@ export default {
           color: $font-500;
         }
       }
+    }
+  }
+
+  .none-border {
+    border: 0;
+    padding: 0;
+    box-shadow: none !important;
+
+    &:after {
+      content: none;
+    }
+  }
+
+  .user-info-icon {
+    .user-back {
+      background: $theme-primary;
     }
   }
 }

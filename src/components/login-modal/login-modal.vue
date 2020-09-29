@@ -23,6 +23,7 @@
               :placeholder="$t('please_enter_user_name')"
               autocomplete="off"
               size="large"
+              @keydown.enter="submit"
             />
           </a-form-model-item>
           <a-form-model-item has-feedback prop="password">
@@ -30,6 +31,7 @@
               v-model="modal.password"
               :placeholder="$t('please_enter_password')"
               size="large"
+              @keydown.enter="submit"
             />
           </a-form-model-item>
           <a-form-model-item v-if="!isSignIn" has-feedback prop="confirm">
@@ -37,6 +39,7 @@
               v-model="modal.confirm"
               :placeholder="$t('please_confirm_password')"
               size="large"
+              @keydown.enter="submit"
             />
           </a-form-model-item>
         </a-form-model>
@@ -146,6 +149,7 @@ export default {
             res.password = crypt.decrypt(res.password)
             this.setUserInfo(res)
             this.setHasLogin(true)
+            window.location.reload()
             this.close()
           })
           .finally(() => {

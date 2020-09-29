@@ -3,6 +3,7 @@ export default {
   none: 'None',
   add_sort: 'Add Sort',
   edit_sort: 'Edit Sort',
+  write_article: 'To Write',
   please_select_parent_sort: 'Please select parent sort',
   please_enter_sort_name: 'Please enter sort name',
   sort: 'Sort',

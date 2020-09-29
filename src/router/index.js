@@ -16,6 +16,12 @@ export default new Router({
         import(/* webpackChunkName: "home" */ '../views/home/home.vue')
     },
     {
+      path: '/not-found',
+      name: 'not-found',
+      component: () =>
+        import(/* webpackChunkName: "home" */ '../components/not-found/not-found.vue')
+    },
+    {
       path: '/article',
       name: 'article',
       component: () =>

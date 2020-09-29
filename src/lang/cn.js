@@ -1,6 +1,7 @@
 export default {
   home: '首页',
   none: '无',
+  write_article: '写文章',
   add_sort: '添加分类',
   edit_sort: '编辑分类',
   please_enter_sort_name: '请输入分类名称',

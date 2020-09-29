@@ -3,8 +3,9 @@
 @import './reset.scss';
 
 .d-container {
-  width: 1200px;
+  width: 880px;
   margin: 0 auto;
   background: $white;
   padding: 24px 16px 84px;
+  min-height: calc(100vh - 118px);
 }

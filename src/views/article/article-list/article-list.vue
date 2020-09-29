@@ -1,11 +1,13 @@
 <template>
-  <div class="article-list">
+  <div class="d-container">
+
   </div>
 </template>
 
 <script>
 export default {
-  name: 'article-list'
+  name: 'article-list',
+
 }
 </script>
 
