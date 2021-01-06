@@ -70,7 +70,7 @@
         <mavon-editor v-model="modal.content"/>
       </a-row>
       <a-row class="article-footer">
-        <a-button @click.native="saveDraft">保存草稿</a-button>
+        <a-button v-if="isShowDraft" @click.native="saveDraft">保存草稿</a-button>
         <a-button type="primary" @click.native="saveArticle">发布文章</a-button>
       </a-row>
     </a-col>
@@ -83,6 +83,7 @@ import api from '@/utils/api'
 import ruleMixin from '@/mixin/rules.mixin'
 import sortModal from '@/components/sort-modal/sort-modal'
 import storeMixin from '@/mixin/store.mixin'
+import _ from 'lodash'
 
 export default {
   name: 'article-editor',
@@ -99,15 +100,19 @@ export default {
         sendIp: '',
         status: 1,
       },
+      isShowDraft: false,
+      articleId: this.$route.query.articleId,
       rules: {
         title: this.validRequire(this.$t('please_enter_article_title')),
         sort: this.validRequire(this.$t('please_select_article_sort')),
         summary: this.validRequire(this.$t('please_enter_article_summary')),
       },
       isShowSortModal: false,
+      loading: false,
     }
   },
   created() {
+    this.getArticleDetail()
     this.getSortList()
   },
   methods: {
@@ -115,12 +120,25 @@ export default {
       this.modal.status = 0
       this.saveArticle()
     },
+    async getArticleDetail() {
+      if (_.isEmpty(this.articleId)) return
+      this.loading = true
+      const article = await api.getArticleDetail(this.articleId)
+      article.sort = article.sortList.map(item => item.sortId)
+      this.modal = article
+      this.loading = false
+    },
     saveArticle() {
       const methods = this.modal.articleId ? 'updateArticle' : 'addArticle'
       api[methods](this.modal).then((res) => {
         this.successHandler()
         this.modal = res
-        this.$router.push(`/article/${res?.articleId}`)
+        this.$router.push({
+          path: '/article/article-detail',
+          query: {
+            articleId: res.articleId
+          }
+        })
       })
     },
   },

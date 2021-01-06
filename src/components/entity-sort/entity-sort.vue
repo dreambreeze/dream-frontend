@@ -1,8 +1,15 @@
 <template>
   <div class="entity-sort">
     <ul class="sort-list">
-      <li class="sort-item">
-        <a-button type="link"></a-button>
+      <li v-for="(item, index) in sortList" :key="index" class="sort-item">
+        <a-button
+          :class="index === current ? 'active-sort' : ''"
+          class="mr-8"
+          type="link"
+          @click.native="sort(item, index)"
+        >
+          {{ item.sortName }}
+        </a-button>
       </li>
     </ul>
   </div>
@@ -10,24 +17,39 @@
 
 <script>
 import {sortEnum} from '@/utils/enum'
+import api from '@/utils/api'
 
 export default {
-  name: "entity-sort",
+  name: 'entity-sort',
   props: {
-    sortType: {
+    type: {
       type: Number,
-      default: sortEnum.article
+      default: sortEnum.article,
     },
   },
   data() {
     return {
-      sortList: [],
+      sortList: [
+        {
+          sortName: '全部',
+          sortId: ''
+        }
+      ],
+      current: 0,
     }
   },
+  created() {
+    this.getSortList()
+  },
   methods: {
-    name() {
-
-    }
+    sort(item, index) {
+      this.current = index
+      this.$emit('sort', item)
+    },
+    async getSortList() {
+      let res = await api.getSortList({type: this.type})
+      this.sortList = [...this.sortList, ...res]
+    },
   },
 }
 </script>
@@ -35,8 +57,18 @@ export default {
 <style lang="scss" scoped type="text/scss">
 .entity-sort {
   .sort-list {
-    .sort-item {
+    display: flex;
+    align-items: center;
+    padding: 0 0;
 
+    ::v-deep .sort-item {
+      button {
+        &.active-sort,
+        &:hover {
+          background: $background-200;
+          border-radius: 5px;
+        }
+      }
     }
   }
 }

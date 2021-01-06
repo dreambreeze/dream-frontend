@@ -1,11 +1,12 @@
 @import './variables';
 @import './mixin.scss';
 @import './reset.scss';
+@import "helper/helper";
 
 .d-container {
   width: 880px;
   margin: 0 auto;
   background: $white;
-  padding: 24px 16px 84px;
+  padding: 16px 16px 84px;
   min-height: calc(100vh - 118px);
 }

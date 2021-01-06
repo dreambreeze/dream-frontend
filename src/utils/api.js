@@ -23,6 +23,11 @@ const http = {
 const baseUrl = process.env.VUE_APP_BASE_URL
 
 export default {
+  async getArticleList(params) {
+    const res = await http.get(`${baseUrl}/system/article/list`, params)
+    return res.data.value
+  },
+
   async getArticleDetail(articleId) {
     const res = await http.get(`${baseUrl}/system/article/${articleId}`)
     return res.data.value
@@ -34,8 +39,12 @@ export default {
   },
 
   async updateArticle(params) {
-    const res = await http.post(`${baseUrl}/system/article`, params)
+    const res = await http.patch(`${baseUrl}/system/article`, params)
     return res.data.value
+  },
+
+  async deleteArticle(articleId) {
+    return http.delete(`${baseUrl}/system/article/${articleId}`)
   },
 
   async signIn(params) {
