@@ -1,5 +1,3 @@
-import {isNullOrUndValue} from '@/utils/utils'
-
 export default {
   methods: {
     validateForms(forms, callback) {
@@ -47,7 +45,7 @@ export default {
       return {
         validator: (rule, value) => {
           value = (value + '').replace(/,/g, '')
-          return isNullOrUndValue(value) || value * 1 < maxValue * 1
+          return this.$utils.isNullOrUndValue(value) || value * 1 < maxValue * 1
         },
         message: `${field} must be less than ${
           formatCallBack ? formatCallBack(maxValue) : maxValue
@@ -58,7 +56,7 @@ export default {
       return {
         validator: (rule, value) => {
           value = (value + '').replace(/,/g, '')
-          return isNullOrUndValue(value) || value * 1 > minValue * 1
+          return this.$utils.isNullOrUndValue(value) || value * 1 > minValue * 1
         },
         message: `${field} must be greater than ${
           formatCallBack ? formatCallBack(minValue) : minValue

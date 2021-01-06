@@ -7,6 +7,7 @@ import i18n from './lang/i18n'
 import library from './components/library'
 import Antd from 'ant-design-vue';
 import mavonEditor from 'mavon-editor'
+import utils from './utils/utils'
 
 import '@/utils/axios.js'
 import 'mavon-editor/dist/css/index.css'
@@ -25,6 +26,9 @@ Vue.prototype.$openLogin = () => {
   store.commit('setHasLogin', false)
   store.commit('setUserInfo', null)
 }
+Vue.prototype.$utils = utils
+
+
 Vue.config.productionTip = false
 
 new Vue({

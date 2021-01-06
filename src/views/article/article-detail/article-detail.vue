@@ -11,6 +11,9 @@
       <h2 class="article-title">
         {{ article.title }}
       </h2>
+      <div>
+        <span>{{ $utils.format.datetime(article.updateAt) }}</span>
+      </div>
       <p class="summary">{{ article.summary }}</p>
       <div class="markdown-body" v-html="markedContent"></div>
     </a-spin>

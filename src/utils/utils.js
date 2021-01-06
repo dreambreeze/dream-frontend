@@ -1,51 +1,51 @@
-import timeZone from '../../node_modules/moment-timezone/moment-timezone.js'
-import numeral from 'numeral'
 import _ from 'lodash'
+import cookie from 'js-cookie'
+import sanitizeHtml from 'sanitize-html'
+import sanitizeConfig from './sanitize'
+import * as is from './is'
+import * as transfer from './transfer'
+import * as format from './format'
 
-/**
- * Formatted number
- * @param {Number} value Number to be formatted
- * @param {String} formatTemp Formatted content template
- */
-function formatNumber(value, formatTemp = '0,0.00') {
-  if (value === undefined || value === null) return '-'
-  return /^[0-9]+.?[0-9]*$/.test(_.toString(value))
-    ? numeral(_.toNumber(value)).format(formatTemp)
-    : value
-}
+const table = Object.entries(format).reduce((table, [k, f]) => {
+  if (_.isFunction(f)) {
+    table['format' + _.upperFirst(k)] = (options = {}) => (mix) =>
+      f(mix, options)
+  }
 
-/**
- * Formatted nullDate
- * @param value is null or '' or undefined to be '-'
- */
-function nullToDash(value) {
-  return value === undefined || value === null || value === '' ? '-' : value
-}
-
-/**
- * Formatted Date
- * @param {Number} value Number to be formatted
- * @param {String} formatTemp Formatted content template
- */
-function formatDate(
-  value,
-  formatTemp = 'en-US',
-  fmtOptions = {year: 'numeric', month: '2-digit', day: '2-digit'}
-) {
-  if (!value) return '-'
-  return new Date(value).toLocaleDateString(formatTemp, fmtOptions)
-}
-
-function formatCTDate({date, fmt = 'MM/DD/YYYY HH:mm', isAddCT = true}) {
-  if (!date) return '-'
-  let dateTime = new Date(date * 1)
-  let time = timeZone.tz(dateTime, 'America/Chicago')
-  let suffix = isAddCT ? ' CT' : ''
-  return time.format(fmt) + suffix
-}
+  return table
+}, {})
 
 function isNullOrUndValue(value) {
   return value === undefined || value === null || value === ''
 }
 
-export {formatNumber, formatDate, formatCTDate, nullToDash, isNullOrUndValue}
+/**
+ * cookie methods, see https://github.com/js-cookie/js-cookie
+ *
+ * @method isDevelopment()
+ * @method isValidDate(mix)
+ * @method isEmpty(mix)
+ * @method isEmptyString(mix)
+ * @method setSessionStorage(key, value)
+ * @method getSessionStorage(key, defaultValue = null)
+ * @method removeSessionStorage(keys)
+ * @method clearSessionStorage(keepKeys = [])
+ * @method setLocalStorage(key, value)
+ * @method getLocalStorage(key, defaultValue = null)
+ * @method removeLocalStorage(keys)
+ * @method clearLocalStorage(keepKeys = [])
+ * @method sanitizeHtml(content, config = null)
+ */
+export default {
+  ...is,
+  cookie,
+  transfer,
+  format,
+  table,
+  isNullOrUndValue,
+  rule: {},
+  mask: {},
+  sanitizeHtml(content, config = null) {
+    return sanitizeHtml(content, config || sanitizeConfig)
+  },
+}
