@@ -16,7 +16,7 @@
       >
         <template v-for="action in item.actions" slot="actions">
           <span :key="action.type" @click="actionEvent(action,item)">
-            <a-icon :type="action.type" style="margin-right: 8px;"/>
+            <a-icon :type="action.type" class="mr-8"/>
             {{ action.text }}
           </span>
         </template>
@@ -115,6 +115,7 @@ export default {
 <style lang="scss" scoped type="text/scss">
 .article-list {
   min-height: 300px;
+  margin: 16px 0 0;
 
   ::v-deep .article-item {
     .ant-list-item-main {

@@ -11,11 +11,11 @@
       <h2 class="article-title">
         {{ article.title }}
       </h2>
-      <div>
+      <div class="article-profile">
         <span>{{ $utils.format.datetime(article.updateAt) }}</span>
+        <p class="summary mt-8">{{ article.summary }}</p>
       </div>
-      <p class="summary">{{ article.summary }}</p>
-      <div class="markdown-body" v-html="markedContent"></div>
+      <div class="markdown-body mt-16" v-html="markedContent"></div>
     </a-spin>
   </div>
 </template>
@@ -66,10 +66,16 @@ export default {
   text-align: center;
 }
 
+.article-profile {
+  background: $background-100;
+  padding: 8px;
+  margin: 0 0 8px;
+  border-radius: 5px;
+}
+
 .summary {
   font-size: 14px;
   color: $font-200;
-  padding: 0 0 8px 0;
   font-style: italic;
 }
 
