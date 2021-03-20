@@ -13,6 +13,7 @@
         slot="renderItem"
         slot-scope="item"
         class="article-item"
+        @click="linkToDetail(item)"
       >
         <template v-for="action in item.actions" slot="actions">
           <span :key="action.type" @click="actionEvent(action,item)">
@@ -25,7 +26,6 @@
           <a-avatar slot="avatar" :src="item.avatar"/>
         </a-list-item-meta>
         <p class="summary">{{ item.summary }}</p>
-        <div class="markdown-body" @click="linkToDetail(item)" v-html="marked(item.content)"></div>
         <div slot="extra" class="img-wrap">
           <img
             src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
@@ -70,10 +70,10 @@ export default {
       let res = await api.getArticleList(params)
       this.articleList = res.items.map(item => {
         item.actions = [
-          {type: 'star-o', text: '156'},
-          {type: 'like-o', text: '156'},
-          {type: 'message', text: '2'},
-          {type: 'delete', text: ''},
+          { type: 'star-o', text: '156' },
+          { type: 'like-o', text: '156' },
+          { type: 'message', text: '2' },
+          { type: 'delete', text: '' },
         ]
         return item
       })
@@ -114,36 +114,34 @@ export default {
 
 <style lang="scss" scoped type="text/scss">
 .article-list {
-  min-height: 300px;
-  margin: 16px 0 0;
 
   ::v-deep .article-item {
+    @include betweenCenter;
+
     .ant-list-item-main {
       display: flex;
       flex-direction: column;
       align-content: space-between;
+      flex: 1;
+      width: 0;
 
       .ant-list-item-meta {
         max-height: 32px;
       }
 
       .summary {
-        @include ellipsis;
+        @include ellipsis2(3);
         font-size: 14px;
-        font-style: italic;
-        color: $font-200;
-        padding: 0 0 12px 0;
+        color: $font-400;
+        padding: 0 8px 12px;
+        height: 110px;
       }
 
-      .markdown-body {
-        flex: 1;
-        @include ellipsis2(2);
-      }
     }
 
     .ant-list-item-extra {
       img {
-        height: 180px;
+        height: 200px;
         object-fit: cover;
         width: 280px;
       }

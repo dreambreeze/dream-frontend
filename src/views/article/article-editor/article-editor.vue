@@ -99,6 +99,7 @@ export default {
         title: '',
         sendIp: '',
         status: 1,
+        summary: this.$t('writing_just_for_better_thinking'),
       },
       isShowDraft: false,
       articleId: this.$route.query.articleId,

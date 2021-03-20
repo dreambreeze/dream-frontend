@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {sortEnum} from '@/utils/enum'
+import { sortEnum } from '@/utils/enum'
 import api from '@/utils/api'
 
 export default {
@@ -47,7 +47,7 @@ export default {
       this.$emit('sort', item)
     },
     async getSortList() {
-      let res = await api.getSortList({type: this.type})
+      let res = await api.getSortList({ type: this.type })
       this.sortList = [...this.sortList, ...res]
     },
   },
@@ -59,9 +59,12 @@ export default {
   .sort-list {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     padding: 0 0;
 
-    ::v-deep .sort-item {
+    .sort-item {
+      margin: 8px 0;
+
       button {
         &.active-sort,
         &:hover {

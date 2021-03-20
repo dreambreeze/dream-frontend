@@ -9,6 +9,16 @@
         <a-button
           button-type="outline-primary"
           class="action-button"
+          @click.native="showAddSaying"
+        >
+          {{ $t('add_saying') }}
+          <a-icon type="plus"/>
+        </a-button>
+      </li>
+      <li class="action-item">
+        <a-button
+          button-type="outline-primary"
+          class="action-button"
           @click.native="logout"
         >
           {{ $t('logout') }}
@@ -16,12 +26,14 @@
         </a-button>
       </li>
     </ul>
+    <saying-change :isShow="isShowAddSaying" @close="isShowAddSaying = false"></saying-change>
   </a-drawer>
 </template>
 
 <script>
 import api from "@/utils/api";
 import storeMixin from '@/mixin/store.mixin'
+import sayingChange from '@/components/saying/saying-change'
 
 export default {
   name: "user-action",
@@ -31,10 +43,12 @@ export default {
       default: false
     },
   },
+  components: {sayingChange},
   mixins: [storeMixin],
   data() {
     return {
-      visible: false
+      visible: false,
+      isShowAddSaying: false,
     }
   },
   watch: {
@@ -45,6 +59,10 @@ export default {
   methods: {
     close() {
       this.$emit('close')
+    },
+    showAddSaying() {
+      this.isShowAddSaying = true
+      this.close()
     },
     logout() {
       api.logout().then(() => {

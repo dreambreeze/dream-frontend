@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <header-bar></header-bar>
-    <div class="app-content">
+    <div class="app-content" @scroll="handleScroll($event)">
       <sidebar v-if="showSideBar"></sidebar>
       <router-view></router-view>
+      <saying></saying>
     </div>
     <footer-bar></footer-bar>
   </div>
@@ -14,15 +15,23 @@ import headerBar from './components/header/header-bar'
 import footerBar from './components/footer/footer-bar'
 import sidebar from './components/sidebar/sidebar'
 import storeMixin from './mixin/store.mixin'
+import saying from "@/components/saying/saying";
+import _ from 'lodash'
 
 export default {
   name: 'app',
   components: {
     headerBar,
     footerBar,
-    sidebar
+    sidebar,
+    saying
   },
   mixins: [storeMixin],
+  methods: {
+    handleScroll: _.throttle(function (e) {
+      console.log(e.srcElement.scrollTop)
+    }, 160)
+  },
 }
 </script>
 
@@ -30,15 +39,17 @@ export default {
 @import './assets/style/global.scss';
 
 #app {
-  position: relative;
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-content {
-  @include center;
   background: $month-white;
-  min-height: calc(100vh - 118px);
+  flex: 1;
+  height: 0;
+  overflow-y: auto;
 
   .v-note-wrapper {
     z-index: 1;

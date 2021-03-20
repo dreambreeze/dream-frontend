@@ -9,8 +9,12 @@ export default {
       locale: 'locale',
       userInfo: 'userInfo',
       sortList: 'sortList',
+      departments: 'departments',
     }),
-    ...mapGetters({}),
+    ...mapGetters({
+      departmentList: 'departmentList',
+      departmentParentList: 'departmentParentList',
+    }),
   },
   methods: {
     ...mapMutations({
@@ -20,6 +24,9 @@ export default {
       setLocale: 'setLocale',
       setUserInfo: 'setUserInfo',
       setSortList: 'setSortList',
+      saveDepartment: 'saveDepartment',
+      setDepartments: 'setDepartments',
+      deleteDepartments: 'deleteDepartments',
     }),
     ...mapActions({
       getSortList: 'getSortList'

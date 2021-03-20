@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueI18N from 'vue-i18n'
-import cn from './cn'
-import en from './en'
+import cn from './cn.json'
+import en from './en.json'
 import {getLocaleStorage, setLocaleStorage} from "@/utils/storage";
 
 Vue.use(VueI18N)

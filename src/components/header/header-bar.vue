@@ -51,7 +51,7 @@
         </a-button>
         <a-button v-else class="none-border" @click.native="isShowUserAction = true">
           <span class="user-info-icon">
-            <a-avatar :src-set="this.userInfo.avatar" class="user-back" icon="user"/>
+            <a-avatar :src-set="userInfo.avatar" class="user-back" icon="user"/>
             {{ this.userInfo.name }}
           </span>
         </a-button>
@@ -62,7 +62,7 @@
   </header>
 </template>
 <script>
-import {VueTyper} from 'vue-typer'
+import { VueTyper } from 'vue-typer'
 import loginModal from '../login-modal/login-modal'
 import userAction from '../user-action/user-action'
 import storeMixin from '@/mixin/store.mixin'
@@ -136,10 +136,7 @@ export default {
 </script>
 <style lang="scss" scoped type="text/scss">
 .header {
-  position: sticky;
-  top: 0;
   height: 58px;
-  z-index: 800;
   @include left;
   box-shadow: $box-shadow-sm;
   background: $white;

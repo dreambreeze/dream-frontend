@@ -14,11 +14,7 @@ export default {
 </script>
 <style lang="scss" scoped type="text/scss">
 .footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
+  height: 40px;
   @include center;
   box-shadow: 0 -1px 4px 0 rgba(31, 45, 61, 0.1);
   background: $white;

@@ -28,6 +28,14 @@ function setLocaleStorage(locale) {
   localStorage.setItem('locale', JSON.stringify(locale))
 }
 
+function getDepartmentStorage() {
+  return JSON.parse(localStorage.getItem('departments'))
+}
+
+function setDepartmentStorage(departments) {
+  console.log(JSON.stringify(departments) + '----')
+  localStorage.setItem('departments', JSON.stringify(departments))
+}
 
 export {
   getHasLoginStorage,
@@ -35,5 +43,7 @@ export {
   getUserInfoStorage,
   setUserInfoStorage,
   getLocaleStorage,
-  setLocaleStorage
+  setLocaleStorage,
+  getDepartmentStorage,
+  setDepartmentStorage
 }

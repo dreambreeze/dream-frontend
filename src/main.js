@@ -8,6 +8,7 @@ import library from './components/library'
 import Antd from 'ant-design-vue';
 import mavonEditor from 'mavon-editor'
 import utils from './utils/utils'
+import lodash from 'lodash'
 
 import '@/utils/axios.js'
 import 'mavon-editor/dist/css/index.css'
@@ -27,6 +28,7 @@ Vue.prototype.$openLogin = () => {
   store.commit('setUserInfo', null)
 }
 Vue.prototype.$utils = utils
+Vue.prototype.$lodash = lodash
 
 
 Vue.config.productionTip = false

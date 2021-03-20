@@ -15,7 +15,7 @@
         <span>{{ $utils.format.datetime(article.updateAt) }}</span>
         <p class="summary mt-8">{{ article.summary }}</p>
       </div>
-      <div class="markdown-body mt-16" v-html="markedContent"></div>
+      <pre class="markdown-body mt-16" v-html="markedContent"></pre>
     </a-spin>
   </div>
 </template>
@@ -63,7 +63,8 @@ export default {
 
 <style lang="scss" scoped type="text/scss">
 .article-title {
-  text-align: center;
+  font-size: 24px;
+  margin: 0 0 16px;
 }
 
 .article-profile {
@@ -75,8 +76,7 @@ export default {
 
 .summary {
   font-size: 14px;
-  color: $font-200;
-  font-style: italic;
+  color: $font-300;
 }
 
 .action-wrap {
