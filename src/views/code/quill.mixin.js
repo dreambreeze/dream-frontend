@@ -50,18 +50,6 @@ export default {
           insertInputButton.classList.add('owner-tool-btn')
           insertInputButton.title = '插入输入框'
         },
-        register(q) {
-          class input extends q.import('blots/block/embed') {
-          }
-
-          class div extends q.import('blots/block/embed') {
-          }
-
-          input.blotName = input.tagName = 'input'
-          div.blotName = div.tagName = 'div'
-          q.register(input)
-          q.register(div)
-        },
       },
       imgUrl: require('../../assets/images/input.png')
     }
@@ -97,13 +85,9 @@ export default {
     insertInput() {
       let selection = window.getSelection()
       let range = selection.getRangeAt(0)
-      // let node = document.createElement('div')
-      // node.setAttribute('contentEditable', true)
-      // node.setAttribute('class', `answer-wrap-${ _.uniqueId() }`)
       let node = document.createElement('img')
       node.setAttribute('src', this.imgUrl)
       node.setAttribute('class', `answer-wrap-${ _.uniqueId() }`)
-      // let node = document.createTextNode(`<input value="" placeholder="请输入答案" class="answer-wrap-${ _.uniqueId() }"/>`)
       range.setStart(range.endContainer, range.endOffset)
       range.insertNode(node)
       range.setEnd(range.endContainer, range.endOffset)
