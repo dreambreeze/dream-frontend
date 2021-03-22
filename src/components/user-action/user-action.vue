@@ -59,7 +59,7 @@ export default {
   mixins: [storeMixin],
   data() {
     return {
-      visible: true,
+      visible: false,
       isShowAddSaying: false,
       isShowChangeTheme: false,
     }
