@@ -15,6 +15,16 @@
           <a-icon type="plus"/>
         </a-button>
       </li>
+      <!--<li class="action-item">
+        <a-button
+          button-type="outline-primary"
+          class="action-button"
+          @click.native="showChangeTheme"
+        >
+          {{ $t('change-theme') }}
+          <a-icon type="control"/>
+        </a-button>
+      </li>-->
       <li class="action-item">
         <a-button
           button-type="outline-primary"
@@ -26,14 +36,16 @@
         </a-button>
       </li>
     </ul>
-    <saying-change :isShow="isShowAddSaying" @close="isShowAddSaying = false"></saying-change>
+    <saying-modal :isShow="isShowAddSaying" @close="isShowAddSaying = false"></saying-modal>
+    <change-theme-modal :isShow="isShowChangeTheme" @close="isShowChangeTheme = false"></change-theme-modal>
   </a-drawer>
 </template>
 
 <script>
 import api from "@/utils/api";
 import storeMixin from '@/mixin/store.mixin'
-import sayingChange from '@/components/saying/saying-change'
+import sayingModal from '@/components/saying/saying-modal'
+import changeThemeModal from '@/components/change-theme/change-theme-modal'
 
 export default {
   name: "user-action",
@@ -43,12 +55,13 @@ export default {
       default: false
     },
   },
-  components: {sayingChange},
+  components: { sayingModal, changeThemeModal },
   mixins: [storeMixin],
   data() {
     return {
-      visible: false,
+      visible: true,
       isShowAddSaying: false,
+      isShowChangeTheme: false,
     }
   },
   watch: {
@@ -62,6 +75,10 @@ export default {
     },
     showAddSaying() {
       this.isShowAddSaying = true
+      this.close()
+    },
+    showChangeTheme() {
+      this.isShowChangeTheme = true
       this.close()
     },
     logout() {

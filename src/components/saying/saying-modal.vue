@@ -30,7 +30,7 @@ import api from "@/utils/api";
 import _ from "lodash";
 
 export default {
-  name: "add-saying",
+  name: "saying-modal",
   props: {
     isShow: {
       type: Boolean,

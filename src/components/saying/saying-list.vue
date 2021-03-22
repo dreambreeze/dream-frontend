@@ -29,12 +29,12 @@
         ></a-button>
       </template>
     </a-table>
-    <saying-change
+    <saying-modal
       :isShow="isShowEditModal"
       :saying="saying"
       @close="isShowEditModal = false"
       @success="getSayingList"
-    ></saying-change>
+    ></saying-modal>
     <template slot="footer">
       <a-button
         type="primary"
@@ -47,14 +47,14 @@
 
 <script>
 import api from '@/utils/api'
-import sayingChange from './saying-change'
+import sayingModal from './saying-modal'
 import { iconButtonSize, modalWidth } from "@/utils/enum";
 import ruleMixin from '@/mixin/rules.mixin'
 
 export default {
   name: "saying-list",
   mixins: [ruleMixin],
-  components: { sayingChange },
+  components: { sayingModal },
   props: {
     isShow: {
       type: Boolean,

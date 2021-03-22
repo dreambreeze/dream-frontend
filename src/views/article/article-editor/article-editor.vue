@@ -67,7 +67,7 @@
         </a-form-model-item>
       </a-form-model>
       <a-row>
-        <mavon-editor v-model="modal.content"/>
+        <mavon-editor v-model="modal.content" :toolbars="toolbars"/>
       </a-row>
       <a-row class="article-footer">
         <a-button v-if="isShowDraft" @click.native="saveDraft">保存草稿</a-button>
@@ -110,6 +110,28 @@ export default {
       },
       isShowSortModal: false,
       loading: false,
+      toolbars: {
+        bold: true,
+        italic: false,
+        header: false,
+        underline: true,
+        strikethrough: false,
+        mark: true,
+        superscript: false,
+        subscript: false,
+        quote: true,
+        ol: true,
+        ul: false,
+        link: true,
+        imagelink: false,
+        code: true,
+        table: false,
+        subfield: false,
+        fullscreen: true,
+        readmodel: false,
+        htmlcode: false,
+        help: true
+      }
     }
   },
   created() {

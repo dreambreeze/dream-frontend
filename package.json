@@ -37,6 +37,7 @@
     "vue": "^2.6.11",
     "vue-click-outside": "1.0.7",
     "vue-clipboard2": "0.3.1",
+    "vue-color": "^2.8.1",
     "vue-functional-data-merge": "^3.1.0",
     "vue-i18n": "8.17.3",
     "vue-router": "^3.4.3",
