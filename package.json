@@ -40,6 +40,7 @@
     "vue-color": "^2.8.1",
     "vue-functional-data-merge": "^3.1.0",
     "vue-i18n": "8.17.3",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.4.3",
     "vue-text-highlight": "^2.0.10",
     "vue-typer": "^1.2.0",

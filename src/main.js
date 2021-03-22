@@ -10,6 +10,11 @@ import mavonEditor from 'mavon-editor'
 import utils from './utils/utils'
 import lodash from 'lodash'
 
+
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
 import '@/utils/axios.js'
 import 'mavon-editor/dist/css/index.css'
 import './assets/style/iconfont/iconfont.css'

@@ -63,7 +63,7 @@ export default {
   components: { sayingList },
   data() {
     return {
-      isShowSaying: true,
+      isShowSaying: false,
       isShowSayings: false,
       saying: {
         author: '佚名',

@@ -6,13 +6,11 @@
       <router-view></router-view>
       <saying></saying>
     </div>
-    <footer-bar></footer-bar>
   </div>
 </template>
 
 <script>
 import headerBar from './components/header/header-bar'
-import footerBar from './components/footer/footer-bar'
 import sidebar from './components/sidebar/sidebar'
 import storeMixin from './mixin/store.mixin'
 import saying from "@/components/saying/saying";
@@ -22,7 +20,6 @@ export default {
   name: 'app',
   components: {
     headerBar,
-    footerBar,
     sidebar,
     saying
   },

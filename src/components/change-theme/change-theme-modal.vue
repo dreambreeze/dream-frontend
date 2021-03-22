@@ -18,10 +18,10 @@
             :style="{ backgroundColor: item.colors.hex   }"
             class="color-square"
           ></span>
+          <color-picker v-model="item.colors" class="color-picker"></color-picker>
         </a-list-item>
       </a-list>
     </a-row>
-    <color-picker v-model="item.colors" class="color-picker"></color-picker>
     <template #footer>
       <a-button @click.native="close">{{ $t('cancel') }}</a-button>
       <a-button :loading="loading" type="primary" @click.native="submit">
@@ -64,16 +64,12 @@ export default {
     },
     themeColors: {
       handler(val) {
-        console.log(val)
         for (let item of val) {
           document.body.style.setProperty(`--${ item.key }`, item.colors.hex)
         }
       },
       deep: true
     }
-  },
-  created() {
-    document.body.style.setProperty('primary_color', '#7C2E3B')
   },
   methods: {
     close() {
