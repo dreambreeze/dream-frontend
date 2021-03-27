@@ -14,7 +14,7 @@ $theme: (
   'dark': #121b25,
 );
 $month-white: #f0f2f5;
-$theme-primary: #2e317c;
+$theme-primary: var(--primary);
 // theme
 $theme-gray: map-get($theme, 'gray') !default;
 $theme-blue: map-get($theme, 'blue') !default;

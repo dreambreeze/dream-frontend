@@ -16,8 +16,8 @@
         @click="linkToDetail(item)"
       >
         <template v-for="action in item.actions" slot="actions">
-          <span :key="action.type" @click="actionEvent(action,item)">
-            <a-icon :type="action.type" class="mr-8"/>
+          <span :key="action.type" class="article-action" @click.stop="actionEvent(action,item)">
+            <a-icon :type="action.type" class="mr-4"/>
             {{ action.text }}
           </span>
         </template>
@@ -28,7 +28,7 @@
         <p class="summary">{{ item.summary }}</p>
         <div slot="extra" class="img-wrap">
           <img
-            src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+            :src="item.imgUrl"
             @click="linkToDetail(item)"
           />
         </div>
@@ -42,10 +42,11 @@ import entitySort from '@/components/entity-sort/entity-sort'
 import api from '@/utils/api'
 import marked from 'marked'
 import ruleMixin from '@/mixin/rules.mixin'
+import storeMixin from '@/mixin/store.mixin'
 
 export default {
   name: 'article-list',
-  mixins: [ruleMixin],
+  mixins: [ruleMixin, storeMixin],
   components: {
     entitySort,
   },
@@ -69,6 +70,8 @@ export default {
       }
       let res = await api.getArticleList(params)
       this.articleList = res.items.map(item => {
+        item.imgUrl = item.imgUrl || this.randomSkyImg
+        item.avatar = item.avatar || this.defaultAvatar
         item.actions = [
           { type: 'star-o', text: '156' },
           { type: 'like-o', text: '156' },
@@ -80,14 +83,15 @@ export default {
       this.loading = false
     },
     deleteArticle(articleId) {
+      const _this = this
       this.$confirm({
         title: this.$t('do_you_want_to_delete_this_item'),
         cancelText: this.$t('cancel'),
         okText: this.$t('ok'),
         onOk() {
           api.deleteArticle(articleId).then(() => {
-            this.successHandler()
-            this.getArticleList()
+            _this.successHandler()
+            _this.getArticleList()
           })
         }
       })
@@ -106,6 +110,8 @@ export default {
         query: {
           articleId: item.articleId,
         }
+      }).catch(e => {
+        console.log(e)
       })
     },
   },
@@ -137,6 +143,13 @@ export default {
         height: 110px;
       }
 
+    }
+
+    .article-action {
+      &:hover {
+        color: $font-400;
+        cursor: pointer;
+      }
     }
 
     .ant-list-item-extra {

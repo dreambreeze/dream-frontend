@@ -1,20 +1,19 @@
-import {mapActions, mapGetters, mapMutations, mapState} from 'vuex'
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 
 export default {
   computed: {
     ...mapState({
       hasLogin: 'hasLogin',
+      defaultAvatar: 'defaultAvatar',
+      logoUrl: 'logoUrl',
+      randomSkyImg: 'randomSkyImg',
       showSideBar: 'showSideBar',
       showLoginModal: 'showLoginModal',
       locale: 'locale',
       userInfo: 'userInfo',
       sortList: 'sortList',
-      departments: 'departments',
     }),
-    ...mapGetters({
-      departmentList: 'departmentList',
-      departmentParentList: 'departmentParentList',
-    }),
+    ...mapGetters({}),
   },
   methods: {
     ...mapMutations({
@@ -24,9 +23,6 @@ export default {
       setLocale: 'setLocale',
       setUserInfo: 'setUserInfo',
       setSortList: 'setSortList',
-      saveDepartment: 'saveDepartment',
-      setDepartments: 'setDepartments',
-      deleteDepartments: 'deleteDepartments',
     }),
     ...mapActions({
       getSortList: 'getSortList'

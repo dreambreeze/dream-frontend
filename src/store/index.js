@@ -1,18 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {
-  getDepartmentStorage,
   getHasLoginStorage,
   getLocaleStorage,
   getUserInfoStorage,
-  setDepartmentStorage,
   setHasLoginStorage,
   setLocaleStorage,
   setUserInfoStorage
 } from '../utils/storage'
 import api from "@/utils/api";
-import {sortEnum} from "@/utils/enum";
+import { sortEnum } from "@/utils/enum";
 import _ from 'lodash'
+import cssVars from "css-vars-ponyfill";
 
 Vue.use(Vuex)
 
@@ -20,27 +19,34 @@ const store = new Vuex.Store({
   state: {
     hasLogin: getHasLoginStorage() || false,
     showSideBar: false,
+    defaultAvatar: require(`@/assets/images/avatar.jpeg`),
+    logoUrl: require('@/assets/images/dreambreeze.png'),
+    randomSkyImg: require(`@/assets/images/sky${ _.random(1, 12) }.jpg`),
     showLoginModal: false,
     locale: getLocaleStorage() || 'cn',
     userInfo: getUserInfoStorage() || {},
     sortList: [],
-    departments: getDepartmentStorage() || [],
-  },
-  getters: {
-    departmentList(state) {
-      let departmentList = state.departments.map(parent => {
-        if (_.isEmpty(parent.parent)) {
-          parent.childrens = state.departments.filter(item => item.parent === parent.number)
-          return parent
-        }
-      })
-      return departmentList.filter(item => !_.isEmpty(item))
+    themeConfig: {
+      primary: '#004CFF',
+      secondary: '#44668c',
+      success: '#008040',
+      danger: '#c82334',
+      warning: '#ffb300',
+      info: '#2A7AB0',
     },
-    departmentParentList(state) {
-      return state.departments.filter(item => _.isEmpty(item.parent))
-    }
   },
+  getters: {},
   mutations: {
+    setThemeConfig(state, data) {
+      const variables = {}
+      Object.assign(state.themeConfig, data)
+      Object.keys(state.themeConfig).forEach((key) => {
+        variables[`--${ key }`] = state.themeConfig[key]
+      })
+      cssVars({
+        variables
+      })
+    },
     setHasLogin(state, data) {
       setHasLoginStorage(data)
       state.hasLogin = data
@@ -62,27 +68,13 @@ const store = new Vuex.Store({
     setSortList(state, data) {
       state.sortList = data
     },
-    saveDepartment(state, data) {
-      const index = state.departments.findIndex(item => item.number === data.number)
-      if (index === -1) {
-        state.departments.push(data)
-      } else {
-        state.departments[index] = data
-      }
-      setDepartmentStorage(state.departments)
-    },
-    setDepartments(state, data) {
-      state.departments = data
-      setDepartmentStorage(data)
-    },
-    deleteDepartments(state, data) {
-      state.departments = state.departments.slice(data, 1)
-      setDepartmentStorage(state.departments)
-    },
   },
   actions: {
+    changeThemeConfig({ commit }, themeConfig = {}) {
+      commit('setThemeConfig', themeConfig)
+    },
     async getSortList(context) {
-      let res = await api.getSortList({type: sortEnum.article})
+      let res = await api.getSortList({ type: sortEnum.article })
       context.commit('setSortList', res)
     },
   },

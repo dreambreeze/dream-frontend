@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -74,3 +74,9 @@ export default new Router({
   ],
   mode: 'history'
 })
+
+router.beforeEach((to, from, next) => {
+  next()
+})
+
+export default router

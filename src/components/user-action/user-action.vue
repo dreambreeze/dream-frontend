@@ -15,7 +15,7 @@
           <a-icon type="plus"/>
         </a-button>
       </li>
-      <!--<li class="action-item">
+      <li class="action-item">
         <a-button
           button-type="outline-primary"
           class="action-button"
@@ -24,7 +24,7 @@
           {{ $t('change-theme') }}
           <a-icon type="control"/>
         </a-button>
-      </li>-->
+      </li>
       <li class="action-item">
         <a-button
           button-type="outline-primary"

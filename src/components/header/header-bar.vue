@@ -3,9 +3,9 @@
     <div class="title-wrap" @click="linkTo('/home')">
       <div class="img-wrap">
         <img
+          :src="logoUrl"
           alt="dream-logo"
           class="logo-img"
-          src="../../assets/images/dreambreeze.png"
         />
       </div>
       <div class="website-name">
@@ -51,7 +51,7 @@
         </a-button>
         <a-button v-else class="none-border" @click.native="isShowUserAction = true">
           <span class="user-info-icon">
-            <a-avatar :src-set="userInfo.avatar" class="user-back" icon="user"/>
+            <a-avatar :src="userAvatar" class="user-back"/>
             {{ this.userInfo.name }}
           </span>
         </a-button>
@@ -66,6 +66,7 @@ import { VueTyper } from 'vue-typer'
 import loginModal from '../login-modal/login-modal'
 import userAction from '../user-action/user-action'
 import storeMixin from '@/mixin/store.mixin'
+import _ from 'lodash'
 
 export default {
   name: 'header-bar',
@@ -81,7 +82,7 @@ export default {
         cn: 'En',
         en: '中',
       },
-      isShowUserAction: false
+      isShowUserAction: false,
     }
   },
   computed: {
@@ -109,6 +110,9 @@ export default {
         },
       ]
     },
+    userAvatar() {
+      return _.isEmpty(_.trim(this.userInfo.avatar)) ? this.defaultAvatar : this.userInfo.avatar
+    }
   },
   methods: {
     closeLogin() {

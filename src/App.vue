@@ -28,8 +28,8 @@ export default {
   },
   mixins: [storeMixin],
   methods: {
-    handleScroll: _.throttle(function (e) {
-      console.log(e.srcElement.scrollTop)
+    handleScroll: _.throttle(function () {
+      //Todo 滚动隐藏header & footer
     }, 160)
   },
 }
