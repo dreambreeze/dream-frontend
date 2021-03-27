@@ -1,4 +1,4 @@
-import '@sn/framework/src/plugins/vue'
+import '@/src/plugins/vue'
 import createEntry from '@sn/framework'
 import scopeRoutes from './router/index'
 import scopeStore from './store/index'

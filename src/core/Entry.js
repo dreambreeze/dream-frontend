@@ -1,14 +1,7 @@
 import _ from 'lodash'
 import cookie from 'js-cookie'
 import { Register } from './Register'
-import {
-  loadScript,
-  getAppConfig,
-  getConfiguration,
-  getMe,
-  goTerms,
-  getIsLogin,
-} from './helper'
+import { getConfiguration, getIsLogin, getMe, goTerms, loadScript, } from './helper'
 
 class Entry {
   constructor({
@@ -43,34 +36,34 @@ class Entry {
   }
 
   init() {
-    if (!this.progress) {
+    if ( !this.progress) {
       this.progress = {
         start: () => {},
         done: () => {},
       }
     }
 
-    if (!this.layout) {
+    if ( !this.layout) {
       throw new Error('Params.layout must be a vue component.')
     }
 
-    if (!this.app) {
+    if ( !this.app) {
       throw new Error('Params.app must be a vue component.')
     }
 
-    if (!this.vue) {
+    if ( !this.vue) {
       throw new Error('Params.vue must be Vue.')
     }
 
-    if (!this.router) {
+    if ( !this.router) {
       throw new Error('Params.router must be vue-router instance.')
     }
 
-    if (!this.store) {
+    if ( !this.store) {
       throw new Error('Params.store must be vuex store instance.')
     }
 
-    if (!this.i18n) {
+    if ( !this.i18n) {
       throw new Error('Params.i18n must be vue-i18n instance.')
     }
   }
@@ -140,12 +133,6 @@ class Entry {
     if (this._isGreenLight()) {
       promise = getConfiguration().then((config) => {
         return {
-          websiteCode: '',
-          tenantId: config?.tenantId,
-          cloudFrontUrl: config?.settings?.cdnUrl,
-          sessionDuration: config?.settings?.sessionDuration,
-          productName: config?.settings?.productName,
-          cdnSubFolder: config?.settings?.cdnSubFolder,
           ...config,
         }
       })
@@ -155,12 +142,6 @@ class Entry {
         .then(([config, login]) => {
           return {
             $jwt: login?.jwt,
-            websiteCode: '',
-            tenantId: config?.tenantId,
-            cloudFrontUrl: config?.settings?.cdnUrl,
-            sessionDuration: config?.settings?.sessionDuration,
-            productName: config?.settings?.productName,
-            cdnSubFolder: config?.settings?.cdnSubFolder,
             ...config,
           }
         })
@@ -176,9 +157,8 @@ class Entry {
 
     return promise.then((config) => {
       const { tenantId } = config
-      if (!tenantId) {
+      if ( !tenantId) {
         const message = 'product code must be set.'
-        console.error(message)
         throw new Error(message)
       }
 
@@ -187,9 +167,10 @@ class Entry {
         Object.keys(resource).forEach((key) => {
           resource[
             key
-          ] = `${config.cloudFrontUrl}/static-resources/${resource[key]}`
+            ] = `${ config.cloudFrontUrl }/static-resources/${ resource[key] }`
         })
       }
+
       if (config.settings) {
         handleStaticResource(config.settings.images || {})
         handleStaticResource(config.settings.staticFile || {})
@@ -233,7 +214,7 @@ class Entry {
 
       const route = [
         {
-          path: `/entry-${name}`,
+          path: `/entry-${ name }`,
           component: layout,
           children: routes,
         },
@@ -258,12 +239,12 @@ class Entry {
    * Only for development.
    */
   _setCookie() {
-    if (!this.isDevelopment) {
+    if ( !this.isDevelopment) {
       return
     }
 
     const token = 'XSRF-TOKEN'
-    const session = 'SN-SESSION'
+    const session = 'xx-SESSION'
     const cookies = [token, session]
     const url = new URL(window.location)
     const queryToken = url.searchParams.get(token)
@@ -413,7 +394,7 @@ class Entry {
     const goToAuthServerText =
       '[[auth or app]]: white list url include this router path, user will go to auth server'
 
-    if (!path) {
+    if ( !path) {
       throw new Error('Invalid path.')
     }
 
@@ -445,7 +426,7 @@ class Entry {
         microApp[key].basePath = '/' + _.trim(basePath, '/')
         microApp[
           key
-        ].cdn = `${cloudFrontUrl}/${productName}/${version}/${productName}.umd.min.js`
+          ].cdn = `${ cloudFrontUrl }/${ productName }/${ version }/${ productName }.umd.min.js`
       })
       this.microAppConfig = microApp
     }
@@ -465,7 +446,7 @@ class Entry {
     const pos = to.path.indexOf('/', 1)
     const routePrefix = pos === -1 ? to.path : to.path.substring(0, pos)
     const config = microAppConfig[routePrefix]
-    if (!config) {
+    if ( !config) {
       return
     }
 
