@@ -1,82 +1,33 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import routes from './routes'
+import progress from '@/plugins/progress'
+import store from '@/store'
 
 Vue.use(Router)
 
 const router = new Router({
+  mode: 'history',
+  scrollBehavior(to, from, savedPosition) {
+    return savedPosition || { x: 0, y: 0 }
+  },
   routes: [
-    {
-      path: '/',
-      redirect: '/home'
-    },
-    {
-      path: '/home',
-      name: 'home',
-      component: () =>
-        import(/* webpackChunkName: "home" */ '../views/home/home.vue')
-    },
-    {
-      path: '/not-found',
-      name: 'not-found',
-      component: () =>
-        import(/* webpackChunkName: "home" */ '../components/not-found/not-found.vue')
-    },
-    {
-      path: '/article',
-      name: 'article',
-      component: () =>
-        import(/* webpackChunkName: "home" */ '../views/article/article.vue'),
-      children: [
-        {
-          path: '/article',
-          name: 'articleList',
-          component: () =>
-            import(
-              /* webpackChunkName: "article" */ '../views/article/article-list/article-list'
-              )
-        },
-        {
-          path: '/article/article-editor',
-          name: 'articleEditor',
-          component: () =>
-            import(
-              /* webpackChunkName: "article" */ '../views/article/article-editor/article-editor'
-              )
-        },
-        {
-          path: '/article/:articleId',
-          name: 'articleDetail',
-          component: () =>
-            import(
-              /* webpackChunkName: "article" */ '../views/article/article-detail/article-detail'
-              )
-        }
-      ]
-    },
-    {
-      path: '/codes',
-      name: 'codes',
-      component: () =>
-        import(/* webpackChunkName: "code" */ '../views/code/codes.vue')
-    },
-    {
-      path: '/links',
-      name: 'links',
-      component: () =>
-        import(/* webpackChunkName: "link" */ '../views/link/links.vue')
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () =>
-        import(/* webpackChunkName: "about" */ '../views/about/about.vue')
-    }
+    ...routes
   ],
-  mode: 'history'
 })
 
 router.beforeEach((to, from, next) => {
+  progress.start()
   next()
 })
+
+const convertedPages = new Set()
+router.afterEach((to) => {
+  progress.done()
+  if (convertedPages.has(to.path)) return
+  convertedPages.add(to.path)
+  store.dispatch('changeThemeConfig')
+})
+
 
 export default router

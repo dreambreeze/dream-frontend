@@ -101,7 +101,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: darken($theme-primary, 10%);
+  background: $theme-primary;
 }
 
 /*滑块*/
