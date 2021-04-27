@@ -5,21 +5,23 @@ module.exports = {
     port: 9999,
     proxy: {
       '^/v1': {
-        target: serverUrl
-      }
-    }
+        target: serverUrl,
+      },
+    },
   },
   css: {
     loaderOptions: {
       less: {
         lessOptions: {
-          modifyVars: {},
+          modifyVars: {
+            'primary-color': '#2E317C',
+          },
           javascriptEnabled: true,
         },
       },
       sass: {
-        additionalData: `@import "@/assets/style/global.scss";`
+        additionalData: `@import "@/assets/style/global.scss";`,
       },
-    }
-  }
+    },
+  },
 }

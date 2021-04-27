@@ -44,19 +44,17 @@
           </a-form-model-item>
         </a-form-model>
         <div class="btn-box">
-          <d-button
+          <a-button
             :loading="loading"
-            button-type="text"
-            class="to-btn"
+            class="mr-8"
             @click.native="isSignIn = !isSignIn"
           >{{ goToText }}
-          </d-button>
-          <d-button
+          </a-button>
+          <a-button
             :loading="loading"
-            button-type="outline-primary"
             @click.native="submit"
           >{{ title }}
-          </d-button>
+          </a-button>
         </div>
       </div>
     </div>
@@ -77,7 +75,7 @@ export default {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(
-          new Error(_.toString(this.$t('please_enter_password')))
+          new Error(_.toString(this.$t('please_enter_password'))),
         )
       } else {
         if (this.modal.confirm !== '') {
@@ -91,14 +89,14 @@ export default {
         callback(new Error(_.toString(this.$t('please_input_the_password_again'))))
       } else if (value !== this.modal.password) {
         callback(
-          new Error(_.toString(this.$t('two_inputs_dont_match')))
+          new Error(_.toString(this.$t('two_inputs_dont_match'))),
         )
       } else {
         callback()
       }
     }
     return {
-      wrapperCol: {span: 24},
+      wrapperCol: { span: 24 },
       isSignIn: true,
       loading: false,
       modal: {
@@ -111,10 +109,10 @@ export default {
           min: 2,
           max: 16,
           message: 'Length should be 3 to 16',
-          trigger: 'blur'
-        },],
-        password: [{validator: validatePass, trigger: 'change'}],
-        confirm: [{validator: confirmPass, trigger: 'change'}],
+          trigger: 'blur',
+        }],
+        password: [{ validator: validatePass, trigger: 'change' }],
+        confirm: [{ validator: confirmPass, trigger: 'change' }],
       },
     }
   },
@@ -126,7 +124,7 @@ export default {
       return !this.isSignIn ? this.$t('to_sign_in') : this.$t('to_sign_up')
     },
     saveModal() {
-      let user = {...this.modal}
+      let user = { ...this.modal }
       delete user.confirm
       user.password = crypt.encrypt(_.trim(user.password)).toString()
       return user
@@ -141,7 +139,7 @@ export default {
     },
     signIn() {
       this.$refs.formModal.validate((valid) => {
-        if (!valid) return
+        if ( !valid) return
         this.loading = true
         api
           .signIn(this.saveModal)
@@ -161,13 +159,13 @@ export default {
     },
     signUp() {
       this.$refs.formModal.validate((valid) => {
-        if (!valid) return
+        if ( !valid) return
         this.loading = true
         api
           .signUp(this.saveModal)
           .then(res => {
             this.$message.success({
-              content: this.$t('successful_operation')
+              content: this.$t('successful_operation'),
             })
             res.password = crypt.decrypt(res.password)
             this.signIn(res)

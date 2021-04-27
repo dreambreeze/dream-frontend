@@ -93,7 +93,7 @@ export default {
             _this.successHandler()
             _this.getArticleList()
           })
-        }
+        },
       })
     },
     actionEvent(action, article) {
@@ -109,7 +109,7 @@ export default {
         path: '/article/article-detail',
         query: {
           articleId: item.articleId,
-        }
+        },
       }).catch(e => {
         console.log(e)
       })
@@ -118,9 +118,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped type="text/scss">
+<style lang="scss" scoped>
 .article-list {
-
   ::v-deep .article-item {
     @include betweenCenter;
 

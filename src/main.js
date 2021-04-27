@@ -13,8 +13,8 @@ import '@/utils/axios.js'
 import 'mavon-editor/dist/css/index.css'
 import './assets/style/iconfont/iconfont.css'
 
-import 'ant-design-vue/dist/antd.less' // 引入官方提供的 less 样式入口文件
-import './assets/style/ant-theme-file.less' // 用于覆盖上面定义的变量
+import 'ant-design-vue/dist/antd.less'
+import './assets/style/ant-theme-file.less'
 
 Vue.use(VueRouter)
 Vue.use(Antd)
@@ -35,5 +35,5 @@ new Vue({
   router,
   store,
   i18n,
-  render: (h) => h(App)
+  render: (h) => h(App),
 }).$mount('#app')
