@@ -139,7 +139,7 @@ export default {
     },
     signIn() {
       this.$refs.formModal.validate((valid) => {
-        if ( !valid) return
+        if (!valid) return
         this.loading = true
         api
           .signIn(this.saveModal)
@@ -159,7 +159,7 @@ export default {
     },
     signUp() {
       this.$refs.formModal.validate((valid) => {
-        if ( !valid) return
+        if (!valid) return
         this.loading = true
         api
           .signUp(this.saveModal)
@@ -182,6 +182,7 @@ export default {
 <style lang="scss" scoped type="text/scss">
 .d-modal {
   @include fullFixed;
+  z-index: $zindex-modal;
 
   .mask {
     @include mask;
