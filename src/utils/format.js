@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import moment from 'moment'
 import * as transfer from './transfer'
 import * as is from './is'
 
@@ -15,12 +16,12 @@ import * as is from './is'
  */
 export function text(
   mix,
-  {invalid = '-', emptyStringToInvalid = true, include = []} = {}
+  { invalid = '-', emptyStringToInvalid = true, include = [] } = {},
 ) {
   if (_.isNumber(mix) && _.isFinite(mix)) {
     mix = String(mix)
   }
-
+  
   if (_.isArray(include) && include.includes(mix)) {
     mix = invalid
   } else if (emptyStringToInvalid && is.isEmptyString(mix)) {
@@ -28,7 +29,7 @@ export function text(
   } else if (!_.isString(mix)) {
     mix = invalid
   }
-
+  
   return mix
 }
 
@@ -48,17 +49,17 @@ export function datetime(
     timezone = null,
     append = '',
     zeroInvalid = true,
-  } = {}
+  } = {},
 ) {
   if (zeroInvalid && /^0$/.test(mix)) {
     return invalid
   }
-
-  const m = transfer.toMoment(mix, {timezone})
+  
+  const m = transfer.toMoment(mix, { timezone })
   if (!m.isValid()) {
     return invalid
   }
-
+  
   if (append) {
     format += ' \\' + append.split('').join('\\')
   }
@@ -81,9 +82,9 @@ export function date(
     timezone = null,
     append = '',
     zeroInvalid = true,
-  } = {}
+  } = {},
 ) {
-  return datetime(mix, {format, invalid, append, timezone, zeroInvalid})
+  return datetime(mix, { format, invalid, append, timezone, zeroInvalid })
 }
 
 /**
@@ -102,9 +103,9 @@ export function time(
     timezone = null,
     append = '',
     zeroInvalid = true,
-  } = {}
+  } = {},
 ) {
-  return datetime(mix, {format, invalid, append, timezone, zeroInvalid})
+  return datetime(mix, { format, invalid, append, timezone, zeroInvalid })
 }
 
 /**
@@ -121,7 +122,7 @@ export function datetimeChicago(
     invalid = '-',
     append = 'CT',
     zeroInvalid = true,
-  } = {}
+  } = {},
 ) {
   return datetime(mix, {
     format,
@@ -141,7 +142,7 @@ export function datetimeChicago(
  */
 export function dateChicago(
   mix,
-  {format = 'L', invalid = '-', append = 'CT', zeroInvalid = true} = {}
+  { format = 'L', invalid = '-', append = 'CT', zeroInvalid = true } = {},
 ) {
   return datetime(mix, {
     format,
@@ -161,7 +162,7 @@ export function dateChicago(
  */
 export function timeChicago(
   mix,
-  {format = 'LT', invalid = '-', append = 'CT', zeroInvalid = true}
+  { format = 'LT', invalid = '-', append = 'CT', zeroInvalid = true },
 ) {
   return datetime(mix, {
     format,
@@ -181,10 +182,10 @@ export function timeChicago(
  */
 export function number(
   mix,
-  {format = '0,0.00', invalid = '-', roundMethod = null} = {}
+  { format = '0,0.00', invalid = '-', roundMethod = null } = {},
 ) {
-  const res = transfer.toNumeral(mix, {invalid: null})
-
+  const res = transfer.toNumeral(mix, { invalid: null })
+  
   return res.value() === null ? invalid : res.format(format, roundMethod)
 }
 
@@ -197,8 +198,8 @@ export function number(
  * @param {String} options.invalid
  * @returns {String}
  */
-export function currency(mix, {format = '$0,0.00', invalid = '-'} = {}) {
-  return number(mix, {format, invalid})
+export function currency(mix, { format = '$0,0.00', invalid = '-' } = {}) {
+  return number(mix, { format, invalid })
 }
 
 /**
@@ -208,9 +209,9 @@ export function currency(mix, {format = '$0,0.00', invalid = '-'} = {}) {
  */
 export function availableCredit(
   mix,
-  {format = '$0,0.00', invalid = '-'} = {}
+  { format = '$0,0.00', invalid = '-' } = {},
 ) {
-  return number(mix, {format, invalid, roundMethod: Math.floor})
+  return number(mix, { format, invalid, roundMethod: Math.floor })
 }
 
 /**
@@ -222,15 +223,15 @@ export function availableCredit(
  */
 export function rate(
   mix,
-  {format = '0.00000', append = '%', invalid = '-'} = {}
+  { format = '0.00000', append = '%', invalid = '-' } = {},
 ) {
-  const res = number(mix, {format, invalid})
-
+  const res = number(mix, { format, invalid })
+  
   if (res === invalid) {
     return res
   }
-
-  return `${res}${append}`
+  
+  return `${ res }${ append }`
 }
 
 /**
@@ -243,17 +244,17 @@ export function rate(
  */
 export function percentage(
   mix,
-  {format = '0.00', append = '%', invalid = '-', magnification = 1} = {}
+  { format = '0.00', append = '%', invalid = '-', magnification = 1 } = {},
 ) {
-  const res = transfer.toNumeral(mix, {invalid: null})
+  const res = transfer.toNumeral(mix, { invalid: null })
   let value = res.value()
-
+  
   if (value === null) {
     return invalid
   }
-
+  
   value = res.multiply(magnification).format(format)
-  return `${value}${append}`
+  return `${ value }${ append }`
 }
 
 /**
@@ -261,21 +262,21 @@ export function percentage(
  * @param {Object} options
  * @param {String} options.invalid
  */
-export function zipcode(mix, {invalid = '-'} = {}) {
+export function zipcode(mix, { invalid = '-' } = {}) {
   if (is.isEmpty(mix)) {
     return invalid
   }
-
+  
   mix = String(mix).replace(/[^\d]/g, '')
-
+  
   if (mix.length < 5) {
     return invalid
   }
-
+  
   if (mix.length === 5) {
     return mix
   }
-
+  
   mix = mix.padEnd(9, '0')
   return mix.substring(0, 5) + '-' + mix.substring(mix.length - 4)
 }
@@ -292,24 +293,24 @@ export function zipcode(mix, {invalid = '-'} = {}) {
  */
 export function mask(
   mix,
-  {invalid = '-', placeholder = '*', length = -4} = {}
+  { invalid = '-', placeholder = '*', length = -4 } = {},
 ) {
   if (!_.isString(mix) && !_.isNumber(mix)) {
     return invalid
   }
-
+  
   mix = String(mix)
   const l = mix.length
   if (l <= Math.abs(length) || length === 0) {
     return mix
   }
-
+  
   if (length > 0) {
     mix = mix.substring(0, length).padEnd(l, placeholder)
   } else {
     mix = mix.substring(l + length).padStart(l, placeholder)
   }
-
+  
   return mix
 }
 
@@ -321,16 +322,16 @@ export function mask(
  * @param {Object} options
  * @param {String} options.invalid
  */
-export function startCase(mix, {invalid = '-'} = {}) {
-  mix = text(mix, {invalid})
+export function startCase(mix, { invalid = '-' } = {}) {
+  mix = text(mix, { invalid })
   if (mix === invalid) {
     return invalid
   }
-
+  
   if (/[-_]/.test(mix)) {
     mix = mix.toLowerCase()
   }
-
+  
   return _.startCase(String(mix))
 }
 
@@ -339,10 +340,20 @@ export function startCase(mix, {invalid = '-'} = {}) {
  * @param {Object} options
  * @param {String} options.invalid
  */
-export function capitalize(mix, {invalid = '-'} = {}) {
+export function capitalize(mix, { invalid = '-' } = {}) {
   if (!_.isString(mix) || is.isEmptyString(mix)) {
     return invalid
   }
-
+  
   return _.capitalize(mix)
+}
+
+
+export function parseStrandedTime(v) {
+  const d = moment.duration(moment().diff(moment(v, 'seconds')))
+  const days = Math.floor(d.asDays()) > 0 ? Math.floor(d.asDays()) + this.$t('days') : ''
+  const hours = d.hours() > 0 ? `${ d.hours() < 10 ? '0' + d.hours() : d.hours() }:` : ''
+  const minutes = d.minutes() > 0 ? `${ d.minutes() < 10 ? '0' + d.minutes() : d.minutes() }:` : ''
+  const seconds = d.seconds() > 0 ? `${ d.seconds() < 10 ? '0' + d.seconds() : d.seconds() }` : ''
+  return `${ days }${ hours }${ minutes }${ seconds }`
 }
