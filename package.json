@@ -23,7 +23,7 @@
     "less": "^3.12.2",
     "less-loader": "^7.0.1",
     "lodash": "^4.17.20",
-    "marked": "^4.0.10",
+    "marked": "^4.0.12",
     "mavon-editor": "2.9.0",
     "moment": "2.24.0",
     "moment-business-days": "1.2.0",

@@ -23,7 +23,7 @@
           ></a-button>
         </div>
       </div>
-      <pre class="markdown-body" v-html="marked(saying.content)"></pre>
+      <pre class="markdown-body" v-html="markedParse(saying.content)"></pre>
       <p class="text-right">--{{ saying.author }}</p>
       <div class="action-wrap">
         <a-button
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import marked from 'marked'
+import { marked } from 'marked'
 import api from '@/utils/api'
 import clipboardCopy from 'clipboard-copy'
 import sayingList from './saying-list'
@@ -88,7 +88,9 @@ export default {
     this.getSayingRandom()
   },
   methods: {
-    marked,
+    markedParse(v) {
+      return marked.parse(v)
+    },
     async getSayingRandom() {
       this.preSaying = this.$lodash.cloneDeep(this.saying)
       const res = await api.getSayingRandom()
@@ -115,7 +117,9 @@ export default {
       })
     },
     transitionHeight() {
-      this.wrapHeight = `${ document.querySelector('.height-auto-wrap').clientHeight + 18 }px`
+      this.wrapHeight = `${
+        document.querySelector('.height-auto-wrap').clientHeight + 18
+      }px`
     },
     clearTimer() {
       clearInterval(this.timer)

@@ -40,7 +40,7 @@
 <script>
 import entitySort from '@/components/entity-sort/entity-sort'
 import api from '@/utils/api'
-import marked from 'marked'
+import { marked } from 'marked'
 import ruleMixin from '@/mixin/rules.mixin'
 import storeMixin from '@/mixin/store.mixin'
 
@@ -102,7 +102,7 @@ export default {
       }
     },
     marked(content) {
-      return marked(content)
+      return marked.parse(content)
     },
     linkToDetail(item) {
       this.$router.push({

@@ -1,5 +1,9 @@
 <template>
-  <a-result status="403" sub-title="Sorry, you are not authorized to access this page." title="403">
+  <a-result
+    status="403"
+    sub-title="Sorry, you are not authorized to access this page."
+    title="403"
+  >
     <template #extra>
       <a-button type="primary">
         Back Home
@@ -10,7 +14,7 @@
 <script>
 export default {
   data() {
-    return {};
+    return {}
   },
-};
+}
 </script>

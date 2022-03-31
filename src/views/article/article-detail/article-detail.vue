@@ -15,14 +15,14 @@
         <span>{{ $utils.format.datetime(article.updateAt) }}</span>
         <p class="summary mt-8">{{ article.summary }}</p>
       </div>
-      <pre class="markdown-body mt-16" v-html="markedContent"></pre>
+      <pr class="markdown-body mt-16" v-html="markedContent"></pr>
     </a-spin>
   </div>
 </template>
 
 <script>
 import api from '@/utils/api'
-import marked from 'marked'
+import { marked } from 'marked'
 import _ from 'lodash'
 
 export default {
@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     markedContent() {
-      return _.isEmpty(this.article.content) ? '' : marked(this.article.content)
+      return _.isEmpty(this.article.content) ? '' : marked.parse(this.article.content)
     },
   },
   created() {
@@ -53,10 +53,10 @@ export default {
       this.$router.push({
         path: '/article/article-editor',
         query: {
-          articleId: this.articleId
-        }
+          articleId: this.articleId,
+        },
       })
-    }
+    },
   },
 }
 </script>
@@ -100,7 +100,7 @@ export default {
       height: 30px;
       color: $white;
       cursor: pointer;
-      transition: all .3s;
+      transition: all 0.3s;
 
       .hover-show {
         display: none;

@@ -14,7 +14,11 @@
       />
     </a-row>
     <a-row>
-      <mavon-editor v-model="modal.content" :subfield="false" :toolbars="toolbars"></mavon-editor>
+      <mavon-editor
+        v-model="modal.content"
+        :subfield="false"
+        :toolbars="toolbars"
+      ></mavon-editor>
     </a-row>
     <template #footer>
       <a-button @click.native="close">{{ $t('cancel') }}</a-button>
@@ -26,11 +30,11 @@
 </template>
 
 <script>
-import api from "@/utils/api";
-import _ from "lodash";
+import api from '@/utils/api'
+import _ from 'lodash'
 
 export default {
-  name: "saying-modal",
+  name: 'saying-modal',
   props: {
     isShow: {
       type: Boolean,
@@ -41,10 +45,10 @@ export default {
       default: () => {
         return {
           author: '佚名',
-          content: ''
+          content: '',
         }
-      }
-    }
+      },
+    },
   },
   data() {
     return {
@@ -71,8 +75,8 @@ export default {
         fullscreen: true,
         readmodel: false,
         htmlcode: false,
-        help: true
-      }
+        help: true,
+      },
     }
   },
   computed: {
@@ -95,7 +99,9 @@ export default {
     },
     async submit() {
       this.loading = true
-      this.isEdit ? await api.updateSaying(this.modal) : await api.addSaying(this.modal)
+      this.isEdit
+        ? await api.updateSaying(this.modal)
+        : await api.addSaying(this.modal)
       this.loading = false
       this.close()
       this.$emit('success')
@@ -104,6 +110,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped type="text/scss">
-
-</style>
+<style lang="scss" scoped type="text/scss"></style>
