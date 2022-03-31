@@ -10,3 +10,13 @@
   padding: 16px 16px 84px;
   min-height: 100vh;
 }
+
+#nprogress .bar {
+  background: var(--warning) !important;
+  position: $zindex-fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px !important;
+}

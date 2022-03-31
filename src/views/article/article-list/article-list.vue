@@ -73,9 +73,9 @@ export default {
         item.imgUrl = item.imgUrl || this.randomSkyImg
         item.avatar = item.avatar || this.defaultAvatar
         item.actions = [
-          { type: 'star-o', text: '156' },
-          { type: 'like-o', text: '156' },
-          { type: 'message', text: '2' },
+          { type: 'star-o', text: item.starNum },
+          { type: 'like-o', text: item.likeNum },
+          { type: 'message', text: item.commentNum },
           { type: 'delete', text: '' },
         ]
         return item

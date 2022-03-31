@@ -146,6 +146,7 @@ export default {
   transition: all 0.3s;
   padding: 8px 16px;
   z-index: 1;
+  overflow: hidden;
 
   .height-auto-wrap {
     height: auto;

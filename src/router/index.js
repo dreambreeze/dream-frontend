@@ -12,7 +12,7 @@ const router = new Router({
     return savedPosition || { x: 0, y: 0 }
   },
   routes: [
-    ...routes
+    ...routes,
   ],
 })
 
@@ -22,12 +22,12 @@ router.beforeEach((to, from, next) => {
 })
 
 const convertedPages = new Set()
+
 router.afterEach((to) => {
   progress.done()
   if (convertedPages.has(to.path)) return
   convertedPages.add(to.path)
   store.dispatch('changeThemeConfig')
 })
-
 
 export default router

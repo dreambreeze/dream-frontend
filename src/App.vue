@@ -15,7 +15,7 @@ import headerBar from './components/header/header-bar'
 import footerBar from './components/footer/footer-bar'
 import sidebar from './components/sidebar/sidebar'
 import storeMixin from './mixin/store.mixin'
-import saying from "@/components/saying/saying";
+import saying from '@/components/saying/saying'
 import _ from 'lodash'
 
 export default {
@@ -24,18 +24,19 @@ export default {
     headerBar,
     footerBar,
     sidebar,
-    saying
+    saying,
   },
   mixins: [storeMixin],
   methods: {
     handleScroll: _.throttle(function () {
       //Todo 滚动隐藏header & footer
-    }, 160)
+    }, 160),
   },
 }
 </script>
 
 <style lang="scss">
+@import "assets/style/var-variables.css";
 @import './assets/style/global.scss';
 
 #app {
