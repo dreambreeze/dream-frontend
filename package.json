@@ -48,7 +48,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-eslint": "~4.2.0",
-    "@vue/cli-service": "~4.2.0",
+    "@vue/cli-service": "~5.0.8",
     "babel-eslint": "^10.0.3",
     "css-vars-ponyfill": "^2.4.3",
     "eslint": "^6.7.2",
